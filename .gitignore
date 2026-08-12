@@ -23,5 +23,4 @@ Thumbs.db
 .vscode/
 
 # Generated local agent/runtime state
-.agents/
 .codex/
