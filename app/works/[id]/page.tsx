@@ -1,0 +1,92 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArtworkMedia } from "../../components/ArtworkMedia";
+import { PortfolioMotion } from "../../components/PortfolioMotion";
+import { SiteHeader } from "../../components/SiteHeader";
+import { artworks, getArtworkById, getNextArtwork } from "../../data/artworks";
+import styles from "./page.module.css";
+
+type DetailPageProps = {
+  params: Promise<{ id: string }>;
+};
+
+export function generateStaticParams() {
+  return artworks.map((artwork) => ({ id: artwork.id }));
+}
+
+export async function generateMetadata({ params }: DetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const artwork = getArtworkById(id);
+
+  return artwork
+    ? { title: `${artwork.title} — Phan Thị Ý Như`, description: `${artwork.title}, ${artwork.medium}, ${artwork.year}.` }
+    : { title: "Artwork — Phan Thị Ý Như" };
+}
+
+function MetadataRail({ artwork }: { artwork: (typeof artworks)[number] }) {
+  return <div className={styles.metadataRail}>
+    <Link href="/#works" className={styles.backLink}>← Works</Link>
+    <span className={styles.metadataIndex}>{String(artworks.indexOf(artwork) + 1).padStart(2, "0")}</span>
+    <h1>{artwork.title}</h1>
+    <span>{artwork.medium}</span>
+    <span>{artwork.year}</span>
+    <span>{artwork.dimensions}</span>
+    <span className={styles.metadataSeries}>{artwork.series}</span>
+  </div>;
+}
+
+function DetailMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
+  const suppliedDetail = artwork.details?.[0];
+  const detailImage = suppliedDetail?.image ?? (artwork.provisional ? artwork.image : undefined);
+  if (!detailImage) return null;
+
+  return <section className={`${styles.detailMovement} motion-reveal`}>
+    <div className={styles.detailRule} />
+    <ArtworkMedia
+      src={detailImage}
+      alt={`${artwork.title} surface detail`}
+      mode="crop"
+      aspectRatio={suppliedDetail?.aspectRatio}
+      className={styles.detailArtwork}
+    />
+    <span className={styles.detailLabel}>DETAIL / 01</span>
+  </section>;
+}
+
+function NextMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
+  const next = getNextArtwork(artwork);
+  const index = artworks.indexOf(next) + 1;
+
+  return <section className={`${styles.nextMovement} motion-reveal`}>
+    <Link href={`/works/${next.id}`} className={styles.nextLink}>
+      <div className={styles.nextCopy}>
+        <span className={styles.nextEyebrow}>NEXT WORK</span>
+        <span className={styles.nextIndex}>{String(index).padStart(2, "0")}</span>
+        <h2>{next.title}</h2>
+        <span>{next.medium} / {next.year}</span>
+      </div>
+      <ArtworkMedia src={next.image} alt={next.title} aspectRatio={next.aspectRatio} className={styles.nextArtwork} />
+    </Link>
+  </section>;
+}
+
+export default async function ArtworkDetailPage({ params }: DetailPageProps) {
+  const { id } = await params;
+  const artwork = getArtworkById(id);
+  if (!artwork) notFound();
+
+  return <PortfolioMotion>
+    <main className={styles.page}>
+      <SiteHeader homePath="/" />
+      <section className={`${styles.opening} motion-reveal`}>
+        <MetadataRail artwork={artwork} />
+        <ArtworkMedia src={artwork.image} alt={artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} priority />
+      </section>
+      {artwork.description && <section className={`${styles.description} motion-reveal`}><p>{artwork.description}</p></section>}
+      <DetailMovement artwork={artwork} />
+      {artwork.process?.map((item, index) => <section className={`${styles.processMovement} motion-reveal`} key={item.image}><ArtworkMedia src={item.image} alt={`${artwork.title} process ${index + 1}`} mode="full" aspectRatio={item.aspectRatio} className={styles.processArtwork} /></section>)}
+      <NextMovement artwork={artwork} />
+    </main>
+  </PortfolioMotion>;
+}

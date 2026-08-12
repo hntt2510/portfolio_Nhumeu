@@ -1,0 +1,7 @@
+.artworkMedia { position: relative; overflow: hidden; min-height: 180px; background: var(--surface); border-radius: 0; }
+.artworkImage { object-position: center; }
+.artworkImageFull { object-fit: contain; }
+.artworkImageCrop { object-fit: cover; }
+.artworkLabel { position: absolute; left: 12px; bottom: 10px; padding: 3px 5px; color: var(--text-muted); background: color-mix(in srgb, var(--surface) 82%, transparent); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.artworkFallback { background: var(--surface); }
+.artworkFallback::after { content: "Artwork placeholder"; position: absolute; inset: 50% auto auto 50%; color: var(--text-muted); font-size: 12px; transform: translate(-50%, -50%); }

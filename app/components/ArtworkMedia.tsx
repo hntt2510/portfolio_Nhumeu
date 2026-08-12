@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "../page.module.css";
+import styles from "./ArtworkMedia.module.css";
 
 type ArtworkMediaProps = {
   src: string;
@@ -10,13 +10,14 @@ type ArtworkMediaProps = {
   className?: string;
   priority?: boolean;
   mode?: "full" | "crop";
+  aspectRatio?: number;
 };
 
-export function ArtworkMedia({ src, alt, label, className = "", priority = false, mode = "full" }: ArtworkMediaProps) {
+export function ArtworkMedia({ src, alt, label, className = "", priority = false, mode = "full", aspectRatio }: ArtworkMediaProps) {
   const showDebugLabel = process.env.NEXT_PUBLIC_ARTWORK_DEBUG === "true";
 
   return (
-    <div className={`${styles.artworkMedia} ${className}`}>
+    <div className={`${styles.artworkMedia} ${className}`} style={aspectRatio ? { aspectRatio } : undefined}>
       <Image
         src={src}
         alt={alt}

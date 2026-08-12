@@ -15,6 +15,7 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let lenis: Lenis | undefined;
     let rafId = 0;
+    const mediaQuery = gsap.matchMedia();
 
     if (!reducedMotion) {
       lenis = new Lenis({ duration: 1.1, smoothWheel: true, syncTouch: false });
@@ -51,9 +52,11 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
         });
       });
 
-      const practice = root.current?.querySelector<HTMLElement>(".practice-section");
-      const practiceCopy = root.current?.querySelector<HTMLElement>(".practice-copy");
-      if (practice && practiceCopy && window.matchMedia("(min-width: 901px)").matches) {
+      mediaQuery.add("(min-width: 901px)", () => {
+        const practice = root.current?.querySelector<HTMLElement>(".practice-section");
+        const practiceCopy = root.current?.querySelector<HTMLElement>(".practice-copy");
+        if (!practice || !practiceCopy) return;
+
         ScrollTrigger.create({
           trigger: practice,
           start: "top top+=24",
@@ -61,10 +64,11 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
           pin: practiceCopy,
           pinSpacing: false,
         });
-      }
+      });
     }, root);
 
     return () => {
+      mediaQuery.revert();
       context.revert();
       lenis?.destroy();
       if (rafId) cancelAnimationFrame(rafId);
