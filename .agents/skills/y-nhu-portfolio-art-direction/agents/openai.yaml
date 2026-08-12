@@ -1,0 +1,6 @@
+interface:
+  display_name: "Y Nhu Portfolio Art Direction"
+  short_description: "Project-specific art direction for Y Nhu"
+  default_prompt: "Use $y-nhu-portfolio-art-direction to design or implement the Y Nhu artist archive."
+policy:
+  allow_implicit_invocation: true

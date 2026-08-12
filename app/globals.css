@@ -1,0 +1,16 @@
+:root {
+  --bg-main: #D9D5CE;
+  --bg-light: #EEEAE4;
+  --surface: #E5E1DA;
+  --paper: #F3F0EA;
+  --text-main: #252421;
+  --text-muted: #77736D;
+  --line: #BDB8AF;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; background: var(--bg-main); }
+body { margin: 0; background: var(--bg-main); color: var(--text-main); font-family: var(--font-sans), Arial, sans-serif; }
+a { color: inherit; text-decoration: none; }
+button { color: inherit; font: inherit; }
+::selection { background: var(--text-main); color: var(--paper); }
