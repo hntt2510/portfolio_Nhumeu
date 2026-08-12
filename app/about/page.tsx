@@ -5,7 +5,7 @@ import { ArtworkMedia } from "../components/ArtworkMedia";
 import { PortfolioMotion } from "../components/PortfolioMotion";
 import { SiteHeader } from "../components/SiteHeader";
 import { artist } from "../data/artist";
-import { artworks } from "../data/artworks";
+import { aboutCuration, requireArtworkById } from "../data/artworks";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ function RecordSection({ title, records }: { title: string; records?: typeof art
     <h2>{title}</h2>
     <div className={styles.records}>
       {records.map((record, index) => <div className={styles.record} key={`${record.title}-${index}`}>
-        <span>{record.year}</span>
+        {record.year && <span>{record.year}</span>}
         <div>
           <strong>{record.title}</strong>
           {(record.institution || record.venue || record.organization) && <span>{record.institution ?? record.venue ?? record.organization}</span>}
@@ -32,7 +32,7 @@ function RecordSection({ title, records }: { title: string; records?: typeof art
 }
 
 export default function AboutPage() {
-  const pauseArtwork = artworks[1];
+  const pauseArtwork = requireArtworkById(aboutCuration.artworkPause, "about artwork pause");
   const hasRecords = Boolean(artist.education?.length || artist.exhibitions?.length || artist.awards?.length);
   const hasContact = Boolean(artist.contact?.email || artist.contact?.instagram || artist.contact?.website);
 
@@ -79,10 +79,10 @@ export default function AboutPage() {
           <p className={styles.eyebrow}>Selected work</p>
           <span className={styles.pauseIndex}>02</span>
           <h2>{pauseArtwork.title}</h2>
-          <p>{pauseArtwork.medium} / {pauseArtwork.year}</p>
+          {(pauseArtwork.medium || pauseArtwork.year !== undefined) && <p>{[pauseArtwork.medium, pauseArtwork.year].filter((value) => value !== undefined).join(" / ")}</p>}
         </div>
         <Link href={`/works/${pauseArtwork.id}`} className={styles.pauseLink}>
-          <ArtworkMedia src={pauseArtwork.image} alt={pauseArtwork.title} aspectRatio={pauseArtwork.aspectRatio} sizes="(max-width: 900px) 90vw, 48vw" className={styles.pauseArtwork} />
+          <ArtworkMedia src={pauseArtwork.image} alt={pauseArtwork.alt ?? pauseArtwork.title} aspectRatio={pauseArtwork.aspectRatio} sizes="(max-width: 900px) 90vw, 48vw" className={styles.pauseArtwork} />
         </Link>
       </section>
 

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "content:audit": "node --experimental-strip-types scripts/audit-assets.mjs"
   },
   "keywords": [],
   "author": "",

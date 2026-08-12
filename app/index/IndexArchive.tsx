@@ -13,6 +13,8 @@ function numberFor(artwork: Artwork, artworks: Artwork[]) {
 export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
   const [selected, setSelected] = useState(artworks[0]);
 
+  if (!selected) return null;
+
   return <div className={styles.archiveLayout}>
     <div className={styles.archiveList}>
       {artworks.map((artwork) => {
@@ -26,8 +28,8 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
           >
             <span>{numberFor(artwork, artworks)}</span>
             <span className={styles.rowTitle}>{artwork.title}</span>
-            <span>{artwork.medium}</span>
-            <span>{artwork.year}</span>
+            {artwork.medium && <span>{artwork.medium}</span>}
+            {artwork.year !== undefined && <span>{artwork.year}</span>}
           </Link>
           <button
             type="button"
@@ -37,14 +39,14 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
             onClick={() => setSelected(artwork)}
           >Preview</button>
           {selectedState && <div id={previewId} className={styles.mobilePreview}>
-            <ArtworkMedia src={artwork.image} alt={artwork.title} aspectRatio={artwork.aspectRatio} sizes="88vw" className={styles.mobilePreviewArtwork} />
+            <ArtworkMedia src={artwork.image} alt={artwork.alt ?? artwork.title} aspectRatio={artwork.aspectRatio} sizes="88vw" className={styles.mobilePreviewArtwork} />
             <Link href={`/works/${artwork.id}`} className={styles.previewLink}>View selected work</Link>
           </div>}
         </div>;
       })}
     </div>
     <aside className={styles.previewColumn} aria-live="polite">
-      <ArtworkMedia src={selected.image} alt={selected.title} aspectRatio={selected.aspectRatio} sizes="38vw" className={styles.previewArtwork} />
+      <ArtworkMedia src={selected.image} alt={selected.alt ?? selected.title} aspectRatio={selected.aspectRatio} sizes="38vw" className={styles.previewArtwork} />
       <Link href={`/works/${selected.id}`} className={styles.previewCaption}>{numberFor(selected, artworks)} / {selected.title}</Link>
     </aside>
   </div>;

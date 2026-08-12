@@ -20,10 +20,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: DetailPageProps): Promise<Metadata> {
   const { id } = await params;
   const artwork = getArtworkById(id);
+  if (!artwork) return { title: "Artwork — Phan Thị Ý Như" };
 
-  return artwork
-    ? { title: `${artwork.title} — Phan Thị Ý Như`, description: `${artwork.title}, ${artwork.medium}, ${artwork.year}.` }
-    : { title: "Artwork — Phan Thị Ý Như" };
+  const metadata = [artwork.medium, artwork.year].filter((value) => value !== undefined).join(", ");
+  return {
+    title: `${artwork.title} — Phan Thị Ý Như`,
+    ...(metadata ? { description: `${artwork.title}, ${metadata}.` } : {}),
+  };
 }
 
 function MetadataRail({ artwork }: { artwork: (typeof artworks)[number] }) {
@@ -31,10 +34,10 @@ function MetadataRail({ artwork }: { artwork: (typeof artworks)[number] }) {
     <Link href="/works" className={styles.backLink}>← Works</Link>
     <span className={styles.metadataIndex}>{String(artworks.indexOf(artwork) + 1).padStart(2, "0")}</span>
     <h1>{artwork.title}</h1>
-    <span>{artwork.medium}</span>
-    <span>{artwork.year}</span>
-    <span>{artwork.dimensions}</span>
-    <span className={styles.metadataSeries}>{artwork.series}</span>
+    {artwork.medium && <span>{artwork.medium}</span>}
+    {artwork.year !== undefined && <span>{artwork.year}</span>}
+    {artwork.dimensions && <span>{artwork.dimensions}</span>}
+    {artwork.series && <span className={styles.metadataSeries}>{artwork.series}</span>}
   </div>;
 }
 
@@ -47,7 +50,7 @@ function DetailMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
     <div className={styles.detailRule} />
     <ArtworkMedia
       src={detailImage}
-      alt={`${artwork.title} surface detail`}
+      alt={suppliedDetail?.alt ?? artwork.alt ?? artwork.title}
       mode="crop"
       aspectRatio={suppliedDetail?.aspectRatio}
       sizes="(max-width: 900px) 90vw, 62vw"
@@ -60,6 +63,7 @@ function DetailMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
 function NextMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
   const next = getNextArtwork(artwork);
   const index = artworks.indexOf(next) + 1;
+  const nextMetadata = [next.medium, next.year].filter((value) => value !== undefined).join(" / ");
 
   return <section className={`${styles.nextMovement} motion-reveal`}>
     <Link href={`/works/${next.id}`} className={styles.nextLink}>
@@ -67,9 +71,9 @@ function NextMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
         <span className={styles.nextEyebrow}>NEXT WORK</span>
         <span className={styles.nextIndex}>{String(index).padStart(2, "0")}</span>
         <h2>{next.title}</h2>
-        <span>{next.medium} / {next.year}</span>
+        {nextMetadata && <span>{nextMetadata}</span>}
       </div>
-      <ArtworkMedia src={next.image} alt={next.title} aspectRatio={next.aspectRatio} sizes="(max-width: 900px) 90vw, 42vw" className={styles.nextArtwork} />
+      <ArtworkMedia src={next.image} alt={next.alt ?? next.title} aspectRatio={next.aspectRatio} sizes="(max-width: 900px) 90vw, 42vw" className={styles.nextArtwork} />
     </Link>
   </section>;
 }
@@ -84,11 +88,11 @@ export default async function ArtworkDetailPage({ params }: DetailPageProps) {
       <SiteHeader activePage="works" />
       <section className={`${styles.opening} motion-reveal`}>
         <MetadataRail artwork={artwork} />
-        <ArtworkMedia src={artwork.image} alt={artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} preload sizes="(max-width: 900px) 90vw, 58vw" />
+        <ArtworkMedia src={artwork.image} alt={artwork.alt ?? artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} preload sizes="(max-width: 900px) 90vw, 58vw" />
       </section>
       {artwork.description && <section className={`${styles.description} motion-reveal`}><p>{artwork.description}</p></section>}
       <DetailMovement artwork={artwork} />
-      {artwork.process?.map((item, index) => <section className={`${styles.processMovement} motion-reveal`} key={item.image}><ArtworkMedia src={item.image} alt={`${artwork.title} process ${index + 1}`} mode="full" aspectRatio={item.aspectRatio} className={styles.processArtwork} /></section>)}
+      {artwork.process?.map((item) => <section className={`${styles.processMovement} motion-reveal`} key={item.image}><ArtworkMedia src={item.image} alt={item.alt ?? artwork.alt ?? artwork.title} mode="full" aspectRatio={item.aspectRatio} className={styles.processArtwork} /></section>)}
       <NextMovement artwork={artwork} />
     </main>
   </PortfolioMotion>;

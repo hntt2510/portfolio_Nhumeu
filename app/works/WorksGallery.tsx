@@ -43,8 +43,8 @@ export function WorksGallery({ artworks }: { artworks: Artwork[] }) {
           <div className={styles.galleryMeta}>
             <span className={styles.galleryNumber}>{artworkNumber(artworks.indexOf(artwork))}</span>
             <span className={styles.galleryTitle}>{artwork.title}</span>
-            <span>{artwork.medium}</span>
-            <span>{artwork.year}</span>
+            {artwork.medium && <span>{artwork.medium}</span>}
+            {artwork.year !== undefined && <span>{artwork.year}</span>}
           </div>
         </Link>
       </article>)}
