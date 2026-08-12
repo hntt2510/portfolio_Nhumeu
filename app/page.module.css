@@ -1,15 +1,18 @@
-.page { overflow: hidden; }
+.page { overflow-x: clip; }
 .nav { display: flex; justify-content: space-between; align-items: center; margin: 0 2.4vw; height: 72px; border-bottom: 1px solid var(--line); font-size: 14px; letter-spacing: -0.02em; }
 .navName { font-family: var(--font-display), Georgia, serif; font-size: 20px; }
 .nav nav, .closing nav { display: flex; gap: 34px; }
 .movement { padding: 8vw 4.8vw; }
-.opening { min-height: calc(100vh - 72px); position: relative; padding-top: 5.6vw; padding-bottom: 2.6vw; display: grid; grid-template-columns: 1fr 0.94fr; grid-template-rows: 1fr auto; column-gap: 7vw; }
-.openingName { align-self: center; max-width: 650px; }
-.opening h1, .closing h2 { font: 400 clamp(4.7rem, 9.5vw, 10.4rem) / .86 var(--font-display), Georgia, serif; letter-spacing: -0.075em; margin: 0; }
+.opening { min-height: calc(100vh - 72px); position: relative; padding-top: 5.6vw; padding-bottom: 2.6vw; display: grid; grid-template-columns: minmax(0, 42fr) minmax(0, 52fr); grid-template-rows: 1fr auto; column-gap: 6vw; }
+.openingName { align-self: center; max-width: 100%; }
+.opening h1 { font: 400 clamp(4.5rem, 8vw, 9rem) / .9 var(--font-display), Georgia, serif; letter-spacing: -.045em; margin: 0; }
+.closing h2 { font: 400 clamp(4.7rem, 9.5vw, 10.4rem) / .86 var(--font-display), Georgia, serif; letter-spacing: -0.075em; margin: 0; }
 .openingArtwork { grid-column: 2; grid-row: 1 / span 2; min-height: calc(100vh - 150px); }
 .openingFooter { grid-column: 1; display: flex; justify-content: space-between; border-top: 1px solid var(--text-main); padding-top: 16px; font-size: 15px; }
 .artworkMedia { position: relative; overflow: hidden; background: var(--surface); min-height: 180px; border-radius: 0; }
-.artworkImage { object-fit: cover; }
+.artworkImage { object-position: center; }
+.artworkImageFull { object-fit: contain; }
+.artworkImageCrop { object-fit: cover; }
 .artworkLabel { position: absolute; left: 12px; bottom: 10px; color: var(--text-muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; background: color-mix(in srgb, var(--surface) 82%, transparent); padding: 3px 5px; }
 .artworkFallback { background: var(--surface); }
 .artworkFallback::after { content: "Artwork placeholder"; position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); color: var(--text-muted); font-size: 12px; }
@@ -20,7 +23,6 @@
 .metadata { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding-top: 6.5vw; color: var(--text-muted); font-size: 14px; line-height: 1.15; }
 .metadataIndex { font: 400 48px / 1 var(--font-display), Georgia, serif; color: var(--text-main); margin-bottom: 25px; }
 .metadataTitle { font: 400 27px / 1.1 var(--font-display), Georgia, serif; color: var(--text-main); }
-.provisional { margin-top: 16px; font-size: 12px; }
 .contrast { min-height: 85vw; display: grid; grid-template-columns: 0.86fr 1fr; align-items: center; column-gap: 14vw; }
 .contrastArtwork { width: min(31vw, 430px); aspect-ratio: .75; justify-self: start; min-height: 400px; }
 .contrast .metadata { padding-top: 0; align-self: center; }
@@ -36,7 +38,6 @@
 .practiceCopy { height: max-content; padding-top: 1vw; }
 .eyebrow { color: var(--text-muted); font-size: 12px; letter-spacing: .13em; text-transform: uppercase; margin: 0 0 25px; }
 .practice h2, .archive h2 { font: 400 clamp(2.6rem, 4.8vw, 5.5rem) / .93 var(--font-display), Georgia, serif; letter-spacing: -.055em; margin: 0; }
-.practiceNote { display: block; margin-top: 35px; color: var(--text-muted); font-size: 12px; }
 .practiceNav { display: flex; flex-direction: column; gap: 4px; margin-top: 6vw; }
 .practiceNav a { width: max-content; border-bottom: 1px solid transparent; font: 400 clamp(1.7rem, 2.7vw, 3rem) / 1.08 var(--font-display), Georgia, serif; color: var(--text-muted); transition: color .35s ease, border-color .35s ease; }
 .practiceNav a:hover, .practiceNav a:focus-visible { color: var(--text-main); border-color: var(--text-main); }
@@ -47,12 +48,11 @@
 .practiceWork .metadata { grid-column: 2; padding: 13px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 20px; font-size: 12px; }
 .practiceWork .metadataIndex { display: none; }
 .practiceWork .metadataTitle { font-size: 18px; grid-column: 1 / -1; }
-.practiceWork .provisional { margin-top: 0; }
 .archive { display: grid; grid-template-columns: 1fr 1.1fr; gap: 7vw; background: var(--paper); }
 .archiveIntro { position: relative; min-height: 720px; }
 .archivePreview { width: 28vw; aspect-ratio: .75; margin: 6vw 0 0 auto; min-height: 460px; }
 .archiveList { padding-top: 8vw; }
-.archiveRow { display: grid; grid-template-columns: 70px 1fr 120px 60px; gap: 20px; align-items: center; border-top: 1px solid var(--line); padding: 24px 0; color: var(--text-muted); transition: color .35s ease; }
+.archiveRow { display: grid; grid-template-columns: 70px 1fr 120px 60px; gap: 20px; align-items: center; width: 100%; border: 0; border-top: 1px solid var(--line); padding: 24px 0; background: transparent; color: var(--text-muted); cursor: pointer; font: inherit; text-align: left; transition: color .35s ease; }
 .archiveRow:last-child { border-bottom: 1px solid var(--line); }
 .archiveRow:hover, .archiveRow:focus-visible { color: var(--text-main); }
 .archiveRowActive { color: var(--text-main); }
@@ -69,7 +69,7 @@
   .navName { font-size: 16px; }
   .movement { padding: 18vw 5vw; }
   .opening { min-height: auto; display: flex; flex-direction: column; gap: 9vw; padding-top: 10vw; padding-bottom: 12vw; }
-  .opening h1 { font-size: clamp(4rem, 18vw, 7.5rem); line-height: .87; }
+  .opening h1 { font-size: clamp(4rem, 16vw, 7rem); line-height: .9; }
   .openingArtwork { order: 2; width: 88vw; min-height: 124vw; align-self: center; }
   .openingFooter { order: 3; display: grid; gap: 7px; font-size: 14px; }
   .featuredGrid { display: flex; flex-direction: column-reverse; gap: 22px; margin-top: 12vw; }
@@ -110,7 +110,6 @@
   .closing { min-height: 65vh; display: flex; flex-direction: column; align-items: flex-start; gap: 12vw; }
   .closing h2 { font-size: 14vw; }
   .closing nav { display: flex; flex-direction: column; gap: 11px; }
-  .closingNote { width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

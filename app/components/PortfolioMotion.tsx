@@ -32,13 +32,14 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
         return;
       }
 
-      gsap.from(".motion-reveal", {
-        opacity: 0,
-        y: 24,
-        duration: 1.2,
-        stagger: 0.08,
-        ease: "power2.out",
-        scrollTrigger: { trigger: ".motion-reveal", start: "top 88%", once: true },
+      gsap.utils.toArray<HTMLElement>(".motion-reveal").forEach((element) => {
+        gsap.from(element, {
+          opacity: 0,
+          y: 24,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: { trigger: element, start: "top 88%", once: true },
+        });
       });
 
       gsap.utils.toArray<HTMLElement>(".artwork-drift").forEach((element) => {

@@ -16,10 +16,11 @@ export function ArchiveSection({ artworks }: { artworks: Artwork[] }) {
       <ArtworkMedia src={selected.image} alt={selected.title} label={`PIC_${selected.id.slice(-2)}`} className={styles.archivePreview} />
     </div>
     <div className={styles.archiveList}>
-      {archiveWorks.map((artwork, index) => <a
+      {archiveWorks.map((artwork, index) => <button
+        type="button"
         className={`${styles.archiveRow} ${selected.id === artwork.id ? styles.archiveRowActive : ""}`}
-        href="#works"
         key={artwork.id}
+        aria-pressed={selected.id === artwork.id}
         onMouseEnter={() => setSelected(artwork)}
         onFocus={() => setSelected(artwork)}
         onClick={() => setSelected(artwork)}
@@ -28,7 +29,7 @@ export function ArchiveSection({ artworks }: { artworks: Artwork[] }) {
         <span className={styles.archiveTitle}>{artwork.title}</span>
         <span>{artwork.medium}</span>
         <span>{artwork.year}</span>
-      </a>)}
+      </button>)}
     </div>
   </section>;
 }

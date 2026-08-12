@@ -850,3 +850,27 @@ The ideal reaction from a viewer is:
 Not:
 
 > "That website had impressive effects."
+
+---
+
+# Visual QA Workflow
+
+Codex-side QA is mandatory for every visual implementation. Manual user review
+is optional and must never be required as a replacement for Codex verification.
+
+Run the project's typecheck, lint, and local runtime smoke test for each visual
+change. When browser tooling is available, inspect desktop and mobile layouts
+around 1440px and 390px, verify responsive hierarchy, natural scrolling,
+interactions, asset loading, accessibility-critical states, and horizontal
+overflow, then compare the result with the approved frames in
+`design/references/homepage-v1/`.
+
+Fix obvious visual regressions before completion and preserve available
+screenshots under `design/qa/<page-or-task>/`. If browser tooling is unavailable,
+report visual QA as unavailable, complete all other checks, and do not require
+manual user QA as a substitute. Browser unavailability alone does not block
+delivery.
+
+The approved reference frames control composition, rhythm, palette, typography,
+and art direction. A later explicit refinement can override an individual
+prototype detail, but does not authorize a broader redesign.

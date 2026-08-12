@@ -7,7 +7,7 @@ const sans = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-sans", 
 
 export const metadata: Metadata = {
   title: "Phan Thị Ý Như — Visual Artist",
-  description: "A provisional digital catalogue for visual artist Phan Thị Ý Như.",
+  description: "A digital catalogue for visual artist Phan Thị Ý Như.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

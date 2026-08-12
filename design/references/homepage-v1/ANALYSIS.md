@@ -30,4 +30,8 @@ The 14 reference frames establish one visual system rather than 14 independent l
 
 ## Prototype status
 
-All artwork imagery is a generated provisional visual study for layout testing. The site labels it as provisional and stores it separately under `public/assets/mock-artworks` so real artist assets can replace it without changing the content model.
+All artwork imagery in this reference set is a generated provisional visual
+study for layout testing. The reference frames remain the visual source of
+truth for composition and art direction; implementation asset storage may follow
+the current canonical asset convention. Provisional state belongs in the data
+model and should not be exposed as normal public UI copy.
