@@ -14,7 +14,7 @@ export function ArchiveSection({ artworks }: { artworks: Artwork[] }) {
     <div className={styles.archiveIntro}>
       <p className={styles.eyebrow}>Archive</p>
       <h2>Selected works</h2>
-      <Link href={`/works/${selected.id}`} className={styles.archivePreviewLink}><ArtworkMedia src={selected.image} alt={selected.title} label={`PIC_${selected.id.slice(-2)}`} aspectRatio={selected.aspectRatio} className={styles.archivePreview} /></Link>
+      <Link href={`/works/${selected.id}`} className={styles.archivePreviewLink}><ArtworkMedia src={selected.image} alt={selected.title} aspectRatio={selected.aspectRatio} sizes="(max-width: 700px) 70vw, 28vw" className={styles.archivePreview} /></Link>
     </div>
     <div className={styles.archiveList}>
       {archiveWorks.map((artwork, index) => <Link

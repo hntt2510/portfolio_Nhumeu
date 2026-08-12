@@ -47,7 +47,7 @@ export default function AboutPage() {
           <p className={styles.role}>{artist.role}</p>
           <p className={styles.practiceLine}>{artist.practices.join(" · ")}</p>
         </div>
-        <ArtistMedia src={artist.portrait} alt={artist.portrait ? `${artist.name} portrait` : undefined} className={styles.portrait} priority />
+        <ArtistMedia src={artist.portrait} alt={artist.portrait ? `${artist.name} portrait` : undefined} className={styles.portrait} preload={Boolean(artist.portrait)} sizes="(max-width: 900px) 90vw, 52vw" />
       </section>
 
       <section className={`${styles.profile} motion-reveal`}>
@@ -82,7 +82,7 @@ export default function AboutPage() {
           <p>{pauseArtwork.medium} / {pauseArtwork.year}</p>
         </div>
         <Link href={`/works/${pauseArtwork.id}`} className={styles.pauseLink}>
-          <ArtworkMedia src={pauseArtwork.image} alt={pauseArtwork.title} aspectRatio={pauseArtwork.aspectRatio} className={styles.pauseArtwork} />
+          <ArtworkMedia src={pauseArtwork.image} alt={pauseArtwork.title} aspectRatio={pauseArtwork.aspectRatio} sizes="(max-width: 900px) 90vw, 48vw" className={styles.pauseArtwork} />
         </Link>
       </section>
 

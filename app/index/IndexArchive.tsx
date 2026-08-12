@@ -37,14 +37,14 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
             onClick={() => setSelected(artwork)}
           >Preview</button>
           {selectedState && <div id={previewId} className={styles.mobilePreview}>
-            <ArtworkMedia src={artwork.image} alt={artwork.title} aspectRatio={artwork.aspectRatio} className={styles.mobilePreviewArtwork} />
+            <ArtworkMedia src={artwork.image} alt={artwork.title} aspectRatio={artwork.aspectRatio} sizes="88vw" className={styles.mobilePreviewArtwork} />
             <Link href={`/works/${artwork.id}`} className={styles.previewLink}>View selected work</Link>
           </div>}
         </div>;
       })}
     </div>
     <aside className={styles.previewColumn} aria-live="polite">
-      <ArtworkMedia src={selected.image} alt={selected.title} aspectRatio={selected.aspectRatio} className={styles.previewArtwork} />
+      <ArtworkMedia src={selected.image} alt={selected.title} aspectRatio={selected.aspectRatio} sizes="38vw" className={styles.previewArtwork} />
       <Link href={`/works/${selected.id}`} className={styles.previewCaption}>{numberFor(selected, artworks)} / {selected.title}</Link>
     </aside>
   </div>;

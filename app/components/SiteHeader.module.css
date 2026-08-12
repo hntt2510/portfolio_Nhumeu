@@ -1,11 +1,57 @@
-.nav { display: flex; align-items: center; justify-content: space-between; height: 72px; margin: 0 2.4vw; border-bottom: 1px solid var(--line); font-size: 14px; letter-spacing: -.02em; }
-.navName { font-family: var(--font-display), Georgia, serif; font-size: 20px; }
-.nav nav { display: flex; gap: 34px; }
-.nav a { transition: color .3s ease, border-color .3s ease; }
+.nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  margin: 0 2.4vw;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  letter-spacing: -.02em;
+}
+
+.navName,
+.dialogName {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 20px;
+}
+
+.desktopNav { display: flex; gap: 34px; }
 .nav a:hover, .nav a:focus-visible { color: var(--text-muted); }
 .navActive { border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+.menuButton { display: none; padding: 8px 0; font-size: 14px; }
+.menuButton:hover, .menuButton:focus-visible { color: var(--text-muted); }
+
+.dialog {
+  width: min(88vw, 360px);
+  min-height: min(84dvh, 720px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  color: var(--text-main);
+}
+
+.dialog::backdrop { background: rgb(37 36 33 / 38%); }
+.dialogHeader { display: flex; align-items: center; justify-content: space-between; padding: 32px 28px 26px; border-bottom: 1px solid var(--line); }
+.dialogName { font-size: 21px; }
+.dialogLabel { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.dialogNav { padding: 56px 28px 0; }
+.dialogLink { display: block; padding: 22px 0; border-bottom: 1px solid var(--line); font-size: 24px; }
+.dialogLinkInner { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: baseline; }
+.dialogLinkInner span:first-child { color: var(--text-muted); font-size: 14px; }
+.dialogLink:hover, .dialogLink:focus-visible { color: var(--text-muted); }
+.dialogClose { width: 100%; margin-top: 72px; padding: 20px 28px; border-top: 1px solid var(--line); font-size: 14px; text-align: center; }
+.dialogClose:hover, .dialogClose:focus-visible { color: var(--text-muted); }
+
 @media (max-width: 900px) {
   .nav { height: 64px; margin: 0 5vw; }
-  .nav nav { gap: 17px; font-size: 12px; }
+  .desktopNav { gap: 17px; font-size: 12px; }
   .navName { font-size: 16px; }
+}
+
+@media (max-width: 700px) {
+  .desktopNav { display: none; }
+  .menuButton { display: block; }
 }

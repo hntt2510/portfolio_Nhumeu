@@ -8,12 +8,13 @@ type ArtworkMediaProps = {
   alt: string;
   label?: string;
   className?: string;
-  priority?: boolean;
+  preload?: boolean;
+  sizes?: string;
   mode?: "full" | "crop";
   aspectRatio?: number;
 };
 
-export function ArtworkMedia({ src, alt, label, className = "", priority = false, mode = "full", aspectRatio }: ArtworkMediaProps) {
+export function ArtworkMedia({ src, alt, label, className = "", preload = false, sizes, mode = "full", aspectRatio }: ArtworkMediaProps) {
   const showDebugLabel = process.env.NEXT_PUBLIC_ARTWORK_DEBUG === "true";
 
   return (
@@ -22,9 +23,9 @@ export function ArtworkMedia({ src, alt, label, className = "", priority = false
         src={src}
         alt={alt}
         fill
-        sizes="(max-width: 700px) 92vw, (max-width: 1200px) 70vw, 55vw"
+        sizes={sizes ?? "(max-width: 700px) 92vw, (max-width: 1200px) 70vw, 55vw"}
         className={`${styles.artworkImage} ${mode === "crop" ? styles.artworkImageCrop : styles.artworkImageFull}`}
-        priority={priority}
+        preload={preload}
         onError={(event) => {
           event.currentTarget.style.display = "none";
           event.currentTarget.parentElement?.classList.add(styles.artworkFallback);

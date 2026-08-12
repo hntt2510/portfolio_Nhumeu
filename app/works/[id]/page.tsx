@@ -11,6 +11,8 @@ type DetailPageProps = {
   params: Promise<{ id: string }>;
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return artworks.map((artwork) => ({ id: artwork.id }));
 }
@@ -48,6 +50,7 @@ function DetailMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
       alt={`${artwork.title} surface detail`}
       mode="crop"
       aspectRatio={suppliedDetail?.aspectRatio}
+      sizes="(max-width: 900px) 90vw, 62vw"
       className={styles.detailArtwork}
     />
     <span className={styles.detailLabel}>DETAIL / 01</span>
@@ -66,7 +69,7 @@ function NextMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
         <h2>{next.title}</h2>
         <span>{next.medium} / {next.year}</span>
       </div>
-      <ArtworkMedia src={next.image} alt={next.title} aspectRatio={next.aspectRatio} className={styles.nextArtwork} />
+      <ArtworkMedia src={next.image} alt={next.title} aspectRatio={next.aspectRatio} sizes="(max-width: 900px) 90vw, 42vw" className={styles.nextArtwork} />
     </Link>
   </section>;
 }
@@ -81,7 +84,7 @@ export default async function ArtworkDetailPage({ params }: DetailPageProps) {
       <SiteHeader activePage="works" />
       <section className={`${styles.opening} motion-reveal`}>
         <MetadataRail artwork={artwork} />
-        <ArtworkMedia src={artwork.image} alt={artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} priority />
+        <ArtworkMedia src={artwork.image} alt={artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} preload sizes="(max-width: 900px) 90vw, 58vw" />
       </section>
       {artwork.description && <section className={`${styles.description} motion-reveal`}><p>{artwork.description}</p></section>}
       <DetailMovement artwork={artwork} />

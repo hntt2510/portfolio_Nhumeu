@@ -36,7 +36,8 @@ export function WorksGallery({ artworks }: { artworks: Artwork[] }) {
             src={artwork.image}
             alt={artwork.title}
             aspectRatio={artwork.aspectRatio}
-            priority={index === 0}
+            preload={index === 0}
+            sizes="(max-width: 700px) 88vw, (max-width: 1100px) 62vw, 38vw"
             className={styles.galleryArtwork}
           />
           <div className={styles.galleryMeta}>
