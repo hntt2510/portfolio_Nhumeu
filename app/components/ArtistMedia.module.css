@@ -1,0 +1,5 @@
+.media { position: relative; min-height: 220px; overflow: hidden; background: var(--surface); }
+.media img { object-position: center; }
+.full { object-fit: contain; }
+.crop { object-fit: cover; }
+.fallback { background: var(--surface); }

@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: DetailPageProps): Promise<Met
 
 function MetadataRail({ artwork }: { artwork: (typeof artworks)[number] }) {
   return <div className={styles.metadataRail}>
-    <Link href="/#works" className={styles.backLink}>← Works</Link>
+    <Link href="/works" className={styles.backLink}>← Works</Link>
     <span className={styles.metadataIndex}>{String(artworks.indexOf(artwork) + 1).padStart(2, "0")}</span>
     <h1>{artwork.title}</h1>
     <span>{artwork.medium}</span>

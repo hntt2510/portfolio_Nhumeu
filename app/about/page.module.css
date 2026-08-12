@@ -1,0 +1,75 @@
+.page { overflow-x: clip; }
+.opening { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 47vw); gap: 8vw; align-items: center; min-height: calc(100vh - 72px); padding: 7vw 4.8vw 9vw; }
+.openingCopy { align-self: center; }
+.eyebrow { margin: 0 0 2vw; color: var(--text-muted); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+.opening h1 { max-width: 720px; margin: 0; font: 400 clamp(4rem, 7.5vw, 8.5rem) / .88 var(--font-display), Georgia, serif; letter-spacing: -.065em; }
+.role { margin: 2.4vw 0 0; color: var(--text-muted); font-size: 18px; }
+.practiceLine { margin: 4vw 0 0; color: var(--text-muted); font-size: 13px; }
+.portrait { width: 100%; min-height: 560px; }
+.profile { display: grid; grid-template-columns: 1fr 1fr; gap: 13vw; padding: 11vw 4.8vw 12vw; background: var(--bg-light); }
+.profileHeading h2, .practice h2, .textSection h2, .recordsTitle, .recordSection h2, .contact h2 { margin: 0; font: 400 clamp(2.4rem, 4vw, 4.7rem) / .94 var(--font-display), Georgia, serif; letter-spacing: -.055em; }
+.profileHeading p:last-child { margin: 18px 0 0; color: var(--text-muted); font-size: 14px; }
+.practice { align-self: end; }
+.practiceList { display: flex; flex-direction: column; margin-top: 3vw; border-top: 1px solid var(--line); }
+.practiceList span { padding: 17px 0; border-bottom: 1px solid var(--line); color: var(--text-muted); font: 400 clamp(1.35rem, 2vw, 2rem) / 1 var(--font-display), Georgia, serif; }
+.textSection { padding: 11vw 25vw 12vw 29vw; }
+.textSection p { max-width: 580px; margin: 3vw 0 0; font: 400 clamp(1.25rem, 1.8vw, 1.8rem) / 1.45 var(--font-sans), Arial, sans-serif; }
+.recordsBlock { padding: 10vw 4.8vw 12vw; background: var(--paper); }
+.recordsTitle { margin-bottom: 8vw; }
+.recordSection { margin-top: 7vw; }
+.recordSection h2 { font-size: clamp(1.8rem, 3vw, 3rem); }
+.records { margin-top: 2.4vw; border-top: 1px solid var(--line); }
+.record { display: grid; grid-template-columns: 18% 1fr; gap: 4vw; padding: 20px 0; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--text-muted); }
+.record strong, .record span { display: block; }
+.record strong { color: var(--text-main); font: 400 1.35rem / 1.1 var(--font-display), Georgia, serif; }
+.record strong + span, .record span + span { margin-top: 5px; }
+.artworkPause { display: grid; grid-template-columns: 32% 1fr; gap: 8vw; align-items: center; padding: 12vw 4.8vw 14vw; }
+.pauseCopy { align-self: center; }
+.pauseIndex { display: block; color: var(--text-muted); font: 400 clamp(3rem, 6vw, 6.5rem) / .8 var(--font-display), Georgia, serif; }
+.pauseCopy h2 { margin: 3vw 0 1vw; font: 400 clamp(2.5rem, 4.5vw, 5rem) / .9 var(--font-display), Georgia, serif; letter-spacing: -.055em; }
+.pauseCopy p:last-child { color: var(--text-muted); font-size: 13px; }
+.pauseLink { width: min(42vw, 620px); justify-self: end; color: inherit; }
+.pauseArtwork { width: 100%; }
+.contact { display: flex; flex-direction: column; gap: 10px; padding: 10vw 4.8vw; background: var(--bg-light); }
+.contact a { width: max-content; color: var(--text-muted); border-bottom: 1px solid transparent; font-size: 14px; }
+.contact a:hover, .contact a:focus-visible { color: var(--text-main); border-color: var(--text-main); }
+.closing { display: grid; grid-template-columns: 1fr auto; align-items: end; min-height: 58vh; gap: 4vw; padding: 10vw 4.8vw 5vw; }
+.closing h2 { margin: 0; font: 400 clamp(3rem, 6vw, 7rem) / .86 var(--font-display), Georgia, serif; letter-spacing: -.065em; }
+.closing p { margin: 18px 0 0; color: var(--text-muted); font-size: 14px; }
+.closing nav { display: flex; gap: 34px; padding-bottom: 3px; font-size: 14px; }
+.closing nav a { border-bottom: 1px solid transparent; }
+.closing nav a:hover, .closing nav a:focus-visible { border-color: currentColor; }
+
+@media (max-width: 900px) {
+  .opening { display: flex; flex-direction: column; align-items: stretch; gap: 12vw; min-height: auto; padding: 16vw 5vw 22vw; }
+  .eyebrow { margin-bottom: 6vw; font-size: 11px; }
+  .opening h1 { font-size: clamp(3.5rem, 15vw, 6rem); }
+  .role { margin-top: 6vw; font-size: 16px; }
+  .practiceLine { margin-top: 8vw; font-size: 12px; line-height: 1.5; }
+  .portrait { min-height: 108vw; }
+  .profile { display: block; padding: 20vw 5vw 24vw; }
+  .profileHeading p:last-child { margin-top: 12px; }
+  .practice { margin-top: 22vw; }
+  .practiceList { margin-top: 8vw; }
+  .practiceList span { padding: 16px 0; font-size: 1.6rem; }
+  .textSection { padding: 20vw 5vw 24vw; }
+  .textSection p { margin-top: 8vw; font-size: 1.1rem; line-height: 1.55; }
+  .recordsBlock { padding: 20vw 5vw 24vw; }
+  .recordsTitle { margin-bottom: 15vw; }
+  .recordSection { margin-top: 16vw; }
+  .records { margin-top: 7vw; }
+  .record { grid-template-columns: 26% 1fr; gap: 5vw; padding: 17px 0; font-size: 11px; }
+  .record strong { font-size: 1.2rem; }
+  .artworkPause { display: flex; flex-direction: column; align-items: stretch; gap: 12vw; padding: 24vw 5vw 28vw; }
+  .pauseIndex { margin-top: 2vw; font-size: 4rem; }
+  .pauseCopy h2 { margin-top: 6vw; font-size: 3rem; }
+  .pauseLink { width: 86vw; align-self: center; }
+  .contact { padding: 20vw 5vw; }
+  .closing { display: flex; flex-direction: column; align-items: flex-start; min-height: 65vh; gap: 18vw; padding: 22vw 5vw 12vw; }
+  .closing h2 { font-size: 14vw; }
+  .closing nav { display: flex; flex-direction: column; gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact a, .closing nav a { transition: none; }
+}

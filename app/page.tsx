@@ -59,7 +59,7 @@ export default function HomePage() {
 
       <ArchiveSection artworks={artworks} />
 
-      <footer id="about" className={`${styles.closing} ${styles.movement}`}><div><h2>Phan Thị Ý Như</h2><p>Visual Artist</p></div><nav aria-label="Footer navigation"><Link href="/works">Works</Link><Link href="/index">Index</Link><a href="#about">About</a></nav></footer>
+      <footer id="about" className={`${styles.closing} ${styles.movement}`}><div><h2>Phan Thị Ý Như</h2><p>Visual Artist</p></div><nav aria-label="Footer navigation"><Link href="/works">Works</Link><Link href="/index">Index</Link><Link href="/about">About</Link></nav></footer>
     </main>
   </PortfolioMotion>;
 }
