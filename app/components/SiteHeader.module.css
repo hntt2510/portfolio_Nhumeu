@@ -1,6 +1,9 @@
 .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; margin: 0 2.4vw; border-bottom: 1px solid var(--line); font-size: 14px; letter-spacing: -.02em; }
 .navName { font-family: var(--font-display), Georgia, serif; font-size: 20px; }
 .nav nav { display: flex; gap: 34px; }
+.nav a { transition: color .3s ease, border-color .3s ease; }
+.nav a:hover, .nav a:focus-visible { color: var(--text-muted); }
+.navActive { border-bottom: 1px solid currentColor; padding-bottom: 3px; }
 @media (max-width: 900px) {
   .nav { height: 64px; margin: 0 5vw; }
   .nav nav { gap: 17px; font-size: 12px; }

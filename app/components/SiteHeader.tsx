@@ -1,16 +1,17 @@
 import Link from "next/link";
 import styles from "./SiteHeader.module.css";
 
-type SiteHeaderProps = { homePath?: "" | "/" };
+export type SitePage = "home" | "works" | "index";
 
-export function SiteHeader({ homePath = "" }: SiteHeaderProps) {
-  const homeLink = (anchor: string) => `${homePath}#${anchor}`;
+type SiteHeaderProps = { activePage?: SitePage };
+
+export function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
   return <header className={styles.nav}>
-    <Link href={homeLink("top")} className={styles.navName}>Phan Thị Ý Như</Link>
+    <Link href="/" className={styles.navName} aria-current={activePage === "home" ? "page" : undefined}>Phan Thị Ý Như</Link>
     <nav aria-label="Primary navigation">
-      <Link href={homeLink("works")}>Works</Link>
-      <Link href={homeLink("index")}>Index</Link>
-      <Link href={homeLink("about")}>About</Link>
+      <Link href="/works" className={activePage === "works" ? styles.navActive : undefined} aria-current={activePage === "works" ? "page" : undefined}>Works</Link>
+      <Link href="/index" className={activePage === "index" ? styles.navActive : undefined} aria-current={activePage === "index" ? "page" : undefined}>Index</Link>
+      <Link href="/#about">About</Link>
     </nav>
   </header>;
 }

@@ -78,7 +78,7 @@ export default async function ArtworkDetailPage({ params }: DetailPageProps) {
 
   return <PortfolioMotion>
     <main className={styles.page}>
-      <SiteHeader homePath="/" />
+      <SiteHeader activePage="works" />
       <section className={`${styles.opening} motion-reveal`}>
         <MetadataRail artwork={artwork} />
         <ArtworkMedia src={artwork.image} alt={artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} priority />

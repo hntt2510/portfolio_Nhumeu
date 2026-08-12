@@ -1,0 +1,47 @@
+.page { overflow-x: clip; }
+.intro { display: flex; align-items: end; justify-content: space-between; min-height: 38vw; padding: 8vw 4.8vw 7vw; }
+.eyebrow { margin: 0 0 1.5vw; color: var(--text-muted); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+.intro h1 { margin: 0; font: 400 clamp(4.5rem, 10vw, 10rem) / .82 var(--font-display), Georgia, serif; letter-spacing: -.07em; }
+.dateRange { margin: 2.5vw 0 0; color: var(--text-muted); font-size: 15px; }
+.introNote { margin: 0 0 3px; color: var(--text-muted); font-size: 12px; }
+.filterBar { display: flex; gap: 28px; margin: 0 4.8vw; padding: 0 0 18px; border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.filterBar button { padding: 0 0 4px; border: 0; border-bottom: 1px solid transparent; background: transparent; cursor: pointer; transition: color .3s ease, border-color .3s ease; }
+.filterBar button:hover, .filterBar button:focus-visible, .filterActive { color: var(--text-main); border-bottom-color: var(--text-main) !important; }
+.gallery { padding: 4vw 4.8vw 14vw; }
+.galleryItem { position: relative; margin-bottom: 12vw; }
+.galleryLink { display: block; color: inherit; }
+.galleryArtwork { width: 100%; transition: opacity .4s ease, transform .7s cubic-bezier(.2,.65,.25,1); }
+.galleryLink:hover .galleryArtwork, .galleryLink:focus-visible .galleryArtwork { opacity: .88; transform: scale(1.008); }
+.galleryMeta { display: grid; grid-template-columns: 38px minmax(150px, 1fr) auto auto; gap: 18px; align-items: baseline; margin-top: 14px; color: var(--text-muted); font-size: 12px; }
+.galleryNumber { color: var(--text-main); }
+.galleryTitle { color: var(--text-main); font: 400 clamp(1.35rem, 2vw, 2.1rem) / 1 var(--font-display), Georgia, serif; }
+.item0 { width: min(38vw, 600px); margin-left: 16vw; }
+.item1 { width: min(22vw, 360px); margin: 2vw 0 12vw 62vw; }
+.item2 { width: min(31vw, 490px); margin-left: 5vw; }
+.item3 { width: min(34vw, 540px); margin: 5vw auto 12vw 35vw; }
+.item4 { width: min(19vw, 300px); margin: 0 0 12vw 72vw; }
+.item5 { width: min(28vw, 440px); margin: 3vw 0 12vw 20vw; }
+
+@media (max-width: 900px) {
+  .intro { display: block; min-height: auto; padding: 17vw 5vw 18vw; }
+  .eyebrow { margin-bottom: 6vw; font-size: 11px; }
+  .intro h1 { font-size: clamp(4.4rem, 20vw, 7rem); }
+  .dateRange { margin-top: 6vw; }
+  .introNote { margin-top: 14vw; }
+  .filterBar { gap: 18px; margin: 0 5vw; padding-bottom: 14px; font-size: 10px; white-space: nowrap; }
+  .gallery { padding: 14vw 5vw 24vw; }
+  .galleryItem, .item0, .item1, .item2, .item3, .item4, .item5 { width: auto; margin-bottom: 23vw; }
+  .item0 { width: 88vw; margin-left: 0; }
+  .item1 { width: 62vw; margin-left: 22vw; }
+  .item2 { width: 72vw; margin-left: 0; }
+  .item3 { width: 84vw; margin-left: 7vw; }
+  .item4 { width: 54vw; margin-left: 41vw; }
+  .item5 { width: 68vw; margin-left: 5vw; }
+  .galleryMeta { grid-template-columns: 28px minmax(0, 1fr) auto; gap: 9px; font-size: 11px; }
+  .galleryMeta span:last-child { grid-column: 2 / -1; }
+  .galleryTitle { font-size: 1.45rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galleryArtwork, .filterBar button { transition: none; }
+}
