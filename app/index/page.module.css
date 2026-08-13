@@ -12,6 +12,7 @@
 .previewColumn { grid-area: preview; position: sticky; top: 8vw; width: 100%; min-width: 0; align-self: start; overflow: hidden; }
 .previewStage { position: relative; width: 100%; aspect-ratio: 1 / 1.15; overflow: hidden; background: var(--surface); }
 .previewLayer { position: absolute; inset: 0; }
+.previewLayerCompact { inset: 9% 8%; }
 .previewArtwork { width: 100%; height: 100%; min-height: 0; }
 .previewCaption, .previewLink { display: inline-block; margin-top: 14px; color: var(--text-muted); font-size: 12px; transition: color .3s ease; }
 .previewCaption:hover, .previewCaption:focus-visible, .previewLink:hover, .previewLink:focus-visible { color: var(--text-main); }

@@ -9,6 +9,10 @@ import { LocalizedText } from "./LocalizedText";
 import type { Artwork } from "../data/artworks";
 import styles from "../page.module.css";
 
+function isCompactArchivePreview(artwork: Artwork) {
+  return artwork.id === "work-be" || artwork.id === "work-xuong-tau";
+}
+
 export function ArchiveSection({ artworks }: { artworks: Artwork[] }) {
   const archiveWorks = artworks;
   const [selected, setSelected] = useState(archiveWorks[0]);
@@ -19,7 +23,7 @@ export function ArchiveSection({ artworks }: { artworks: Artwork[] }) {
     <div className={styles.archiveIntro}>
       <p className={styles.eyebrow}><LocalizedText vi="Lưu trữ" en="Archive" /></p>
       <h2><LocalizedText vi="Tác phẩm chọn lọc" en="Selected works" /></h2>
-      <Link href={`/works/${selected.id}`} className={styles.archivePreviewLink}><ArtworkMedia src={selected.image} alt={selected.alt ?? selected.title} aspectRatio={selected.aspectRatio} sizes="(max-width: 700px) 70vw, 28vw" className={styles.archivePreview} /></Link>
+      <Link href={`/works/${selected.id}`} className={`${styles.archivePreviewLink} ${isCompactArchivePreview(selected) ? styles.archivePreviewLinkCompact : ""}`}><ArtworkMedia src={selected.image} alt={selected.alt ?? selected.title} aspectRatio={selected.aspectRatio} loading="eager" sizes="(max-width: 700px) 70vw, 28vw" className={styles.archivePreview} /></Link>
     </div>
     <div className={styles.archiveList}>
       {archiveWorks.map((artwork, index) => <Link

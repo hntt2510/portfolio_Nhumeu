@@ -11,6 +11,7 @@ export type ArtworkMediaProps = {
   label?: string;
   className?: string;
   preload?: boolean;
+  loading?: "eager" | "lazy";
   sizes?: string;
   mode?: "full" | "crop";
   aspectRatio?: number;
@@ -18,7 +19,7 @@ export type ArtworkMediaProps = {
   paperReveal?: boolean;
 };
 
-export function ArtworkMedia({ src, alt, label, className = "", preload = false, sizes, mode = "full", aspectRatio, focus, paperReveal = false }: ArtworkMediaProps) {
+export function ArtworkMedia({ src, alt, label, className = "", preload = false, loading, sizes, mode = "full", aspectRatio, focus, paperReveal = false }: ArtworkMediaProps) {
   const showDebugLabel = process.env.NEXT_PUBLIC_ARTWORK_DEBUG === "true";
   const focusStyle = focus && mode === "crop" ? {
     objectPosition: `${focus.x}% ${focus.y}%`,
@@ -36,6 +37,7 @@ export function ArtworkMedia({ src, alt, label, className = "", preload = false,
         alt={alt}
         fill
         sizes={sizes ?? "(max-width: 700px) 92vw, (max-width: 1200px) 70vw, 55vw"}
+        loading={loading}
         className={`${styles.artworkImage} ${mode === "crop" ? styles.artworkImageCrop : styles.artworkImageFull} ${focus ? styles.artworkImageFocus : ""}`}
         style={focusStyle}
         preload={preload}

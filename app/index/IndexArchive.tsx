@@ -16,6 +16,10 @@ function numberFor(artwork: Artwork, artworks: Artwork[]) {
   return String(artworks.indexOf(artwork) + 1).padStart(2, "0");
 }
 
+function isCompactPreview(artwork: Artwork) {
+  return artwork.id === "work-be" || artwork.id === "work-xuong-tau";
+}
+
 export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
   const [selected, setSelected] = useState(artworks[0]);
   const [previous, setPrevious] = useState<Artwork | undefined>();
@@ -86,8 +90,8 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
     </div>
     <aside ref={previewRef} className={styles.previewColumn} aria-live="polite">
       <div className={styles.previewStage}>
-        {previous && previous.id !== selected.id && <div className={styles.previewLayer} data-preview-layer="outgoing"><ArtworkMedia src={previous.image} alt={previous.alt ?? previous.title} aspectRatio={previous.aspectRatio} sizes="43vw" className={styles.previewArtwork} /></div>}
-        <div className={styles.previewLayer} data-preview-layer="incoming"><ArtworkMedia src={selected.image} alt={selected.alt ?? selected.title} aspectRatio={selected.aspectRatio} sizes="43vw" className={styles.previewArtwork} /></div>
+        {previous && previous.id !== selected.id && <div className={`${styles.previewLayer} ${isCompactPreview(previous) ? styles.previewLayerCompact : ""}`} data-preview-layer="outgoing"><ArtworkMedia src={previous.image} alt={previous.alt ?? previous.title} aspectRatio={previous.aspectRatio} sizes="43vw" className={styles.previewArtwork} /></div>}
+        <div className={`${styles.previewLayer} ${isCompactPreview(selected) ? styles.previewLayerCompact : ""}`} data-preview-layer="incoming"><ArtworkMedia src={selected.image} alt={selected.alt ?? selected.title} aspectRatio={selected.aspectRatio} sizes="43vw" className={styles.previewArtwork} /></div>
       </div>
       <Link href={`/works/${selected.id}`} className={styles.previewCaption}>{numberFor(selected, artworks)} / <ArtworkTitle artwork={selected} /></Link>
     </aside>
