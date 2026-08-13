@@ -28,3 +28,6 @@ Thumbs.db
 # Local source photographs supplied for content normalization
 ANH/
 ANH.zip
+
+.vercel
+.env*

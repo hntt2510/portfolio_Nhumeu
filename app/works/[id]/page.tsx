@@ -14,6 +14,7 @@ type DetailPageProps = {
 };
 
 export const dynamicParams = false;
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return artworks.map((artwork) => ({ id: artwork.id }));

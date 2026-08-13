@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Index — Phan Thị Ý Như",
   description: "An artwork index for visual artist Phan Thị Ý Như.",
 };
+export const dynamic = "force-dynamic";
 
 export default function IndexPage() {
   return <PortfolioMotion>
