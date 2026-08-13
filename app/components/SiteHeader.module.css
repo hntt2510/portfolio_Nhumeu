@@ -17,6 +17,7 @@
   font-size: 20px;
 }
 
+.desktopActions { display: flex; align-items: center; gap: 28px; }
 .desktopNav { display: flex; gap: 34px; }
 .nav a:hover, .nav a:focus-visible { color: var(--text-muted); }
 .navActive { border-bottom: 1px solid currentColor; padding-bottom: 3px; }
@@ -44,14 +45,16 @@
 .dialogLink:hover, .dialogLink:focus-visible { color: var(--text-muted); }
 .dialogClose { width: 100%; margin-top: 72px; padding: 20px 28px; border-top: 1px solid var(--line); font-size: 14px; text-align: center; }
 .dialogClose:hover, .dialogClose:focus-visible { color: var(--text-muted); }
+.dialogLocale { padding: 32px 28px 0; }
 
 @media (max-width: 900px) {
   .nav { height: 64px; margin: 0 5vw; }
   .desktopNav { gap: 17px; font-size: 12px; }
+  .desktopActions { gap: 16px; }
   .navName { font-size: 16px; }
 }
 
 @media (max-width: 700px) {
-  .desktopNav { display: none; }
+  .desktopActions { display: none; }
   .menuButton { display: block; }
 }

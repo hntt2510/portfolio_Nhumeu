@@ -19,11 +19,11 @@ function print(message = "") {
 
 function publicPathFromAsset(assetPath) {
   if (typeof assetPath !== "string" || !assetPath.startsWith("/assets/")) return null;
-  return path.join(root, "public", assetPath.slice(1));
+  return path.join(root, "public", assetPath.split(/[?#]/, 1)[0].slice(1));
 }
 
 function relativeAssetPath(assetPath) {
-  return assetPath.replace(/^\/assets\//, "");
+  return assetPath.split(/[?#]/, 1)[0].replace(/^\/assets\//, "");
 }
 
 function addReference(assetPath, label, required = true) {

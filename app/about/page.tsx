@@ -7,6 +7,8 @@ import { SiteHeader } from "../components/SiteHeader";
 import { artist } from "../data/artist";
 import { aboutCuration, requireArtworkById } from "../data/artworks";
 import styles from "./page.module.css";
+import { ArtworkMedium } from "../components/LocalizedArtworkText";
+import { LocalizedText } from "../components/LocalizedText";
 
 export const metadata: Metadata = {
   title: "About — Phan Thị Ý Như",
@@ -42,7 +44,7 @@ export default function AboutPage() {
 
       <section className={`${styles.opening} motion-reveal`}>
         <div className={styles.openingCopy}>
-          <p className={styles.eyebrow}>About</p>
+          <p className={styles.eyebrow}><LocalizedText vi="Giới thiệu" en="About" /></p>
           <h1>{artist.name}</h1>
           <p className={styles.role}>{artist.role}</p>
           <p className={styles.practiceLine}>{artist.practices.join(" · ")}</p>
@@ -59,10 +61,10 @@ export default function AboutPage() {
         <div className={styles.profileHeading}>
           <p className={styles.eyebrow}>Profile</p>
           <h2>{artist.name}</h2>
-          <p>{artist.role}</p>
+          <p><LocalizedText vi="Nghệ sĩ thị giác" en={artist.role} /></p>
         </div>
         <div className={styles.practice}>
-          <h2>Practice</h2>
+          <h2><LocalizedText vi="Thực hành" en="Practice" /></h2>
           <div className={styles.practiceList}>
             {artist.practices.map((practice) => <span key={practice}>{practice}</span>)}
           </div>
@@ -70,11 +72,11 @@ export default function AboutPage() {
       </section>
 
       {artist.statement && <section className={`${styles.textSection} motion-reveal`}><h2>Statement</h2><p>{artist.statement}</p></section>}
-      {artist.biography && <section className={`${styles.textSection} motion-reveal`}><h2>Biography</h2><p>{artist.biography}</p></section>}
-      {artist.practice && <section className={`${styles.textSection} motion-reveal`}><h2>Practice</h2><p>{artist.practice}</p></section>}
+      {artist.biography && <section className={`${styles.textSection} motion-reveal`}><h2><LocalizedText vi="Tiểu sử" en="Biography" /></h2><p><LocalizedText vi="Phan Thị Ý Như sinh năm 2004 tại Bình Định và hiện sống, học tập tại Thành phố Hồ Chí Minh. Cô là sinh viên năm ba ngành Hội hoạ, Trường Đại học Mỹ thuật Thành phố Hồ Chí Minh.\n\nĐến với hội hoạ từ sớm, Ý Như hiện đang tìm hiểu những chất liệu và cách tiếp cận khác nhau để tìm ra ngôn ngữ thị giác phù hợp nhất với thực hành đang hình thành của mình. Các tác phẩm thường bắt đầu từ những quan sát gần gũi về đời sống và những không gian xung quanh — những con phố quen, nội thất, môi trường lao động, con người và khoảnh khắc thoáng qua được chuyển hoá qua màu sắc, bề mặt và bố cục." en={artist.biography} /></p></section>}
+      {artist.practice && <section className={`${styles.textSection} motion-reveal`}><h2><LocalizedText vi="Thực hành" en="Practice" /></h2><p><LocalizedText vi="Ở giai đoạn này, Ý Như đặc biệt quan tâm đến sơn mài. Quy trình nhiều lớp — bồi, phủ, mài và dần dần hé lộ bề mặt — cho phép hình ảnh phát triển qua cả chất liệu lẫn thời gian. Mối quan hệ thay đổi giữa chiều sâu, kết cấu và ánh sáng phản chiếu mở ra một cách suy nghĩ về hình ảnh vượt ra ngoài sơn vẽ đơn thuần." en={artist.practice} /></p></section>}
 
       {hasRecords && <section className={styles.recordsBlock}>
-        <h2 className={styles.recordsTitle}>Record</h2>
+        <h2 className={styles.recordsTitle}><LocalizedText vi="Thông tin" en="Record" /></h2>
         <RecordSection title="Education" records={artist.education} />
         <RecordSection title="Selected Exhibitions" records={artist.exhibitions} />
         <RecordSection title="Awards" records={artist.awards} />
@@ -82,21 +84,21 @@ export default function AboutPage() {
 
       <section className={`${styles.artworkPause} motion-reveal`}>
         <div className={styles.pauseCopy}>
-          <p className={styles.eyebrow}>Selected work</p>
+          <p className={styles.eyebrow}><LocalizedText vi="Tác phẩm chọn lọc" en="Selected work" /></p>
           <span className={styles.pauseIndex}>02</span>
           <h2>{pauseArtwork.title}</h2>
-          {(pauseArtwork.medium || pauseArtwork.year !== undefined) && <p>{[pauseArtwork.medium, pauseArtwork.year].filter((value) => value !== undefined).join(" / ")}</p>}
+          {pauseArtwork.medium && <p><ArtworkMedium artwork={pauseArtwork} /></p>}
         </div>
         <Link href={`/works/${pauseArtwork.id}`} className={styles.pauseLink}>
           <ArtworkMedia src={pauseArtwork.image} alt={pauseArtwork.alt ?? pauseArtwork.title} aspectRatio={pauseArtwork.aspectRatio} sizes="(max-width: 900px) 90vw, 48vw" className={styles.pauseArtwork} />
         </Link>
       </section>
 
-      {hasContact && <section className={`${styles.contact} motion-reveal`}><h2>Contact</h2>{artist.contact?.facebook && <a href={artist.contact.facebook} target="_blank" rel="noreferrer">Facebook</a>}{artist.contact?.email && <a href={`mailto:${artist.contact.email}`}>{artist.contact.email}</a>}{artist.contact?.instagram && <a href={artist.contact.instagram}>Instagram</a>}{artist.contact?.website && <a href={artist.contact.website}>Website</a>}</section>}
+      {hasContact && <section className={`${styles.contact} motion-reveal`}><h2><LocalizedText vi="Liên hệ" en="Contact" /></h2>{artist.contact?.facebook && <a href={artist.contact.facebook} target="_blank" rel="noreferrer">Facebook</a>}{artist.contact?.email && <a href={`mailto:${artist.contact.email}`}>{artist.contact.email}</a>}{artist.contact?.instagram && <a href={artist.contact.instagram}>Instagram</a>}{artist.contact?.website && <a href={artist.contact.website}>Website</a>}</section>}
 
       <footer className={styles.closing}>
-        <div><h2>{artist.name}</h2><p>{artist.role}</p></div>
-        <nav aria-label="Footer navigation"><Link href="/works">Works</Link><Link href="/index">Index</Link><Link href="/about" aria-current="page">About</Link></nav>
+        <div><h2>{artist.name}</h2><p><LocalizedText vi="Nghệ sĩ thị giác" en={artist.role} /></p></div>
+        <nav aria-label="Footer navigation"><Link href="/works"><LocalizedText vi="Tác phẩm" en="Works" /></Link><Link href="/index"><LocalizedText vi="Danh mục" en="Index" /></Link><Link href="/about" aria-current="page"><LocalizedText vi="Giới thiệu" en="About" /></Link></nav>
       </footer>
     </main>
   </PortfolioMotion>;

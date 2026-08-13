@@ -3,16 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { LocaleSwitch } from "./LocaleSwitch";
+import { LocalizedText } from "./LocalizedText";
 import styles from "./SiteHeader.module.css";
 
 export type SitePage = "home" | "works" | "index" | "about";
 
 type SiteHeaderProps = { activePage?: SitePage | null };
 
-const menuItems: Array<{ page: SitePage; label: string; href: string }> = [
-  { page: "works", label: "Works", href: "/works" },
-  { page: "index", label: "Index", href: "/index" },
-  { page: "about", label: "About", href: "/about" },
+const menuItems: Array<{ page: SitePage; vi: string; en: string; href: string }> = [
+  { page: "works", vi: "Tác phẩm", en: "Works", href: "/works" },
+  { page: "index", vi: "Danh mục", en: "Index", href: "/index" },
+  { page: "about", vi: "Giới thiệu", en: "About", href: "/about" },
 ];
 
 function currentProps(activePage: SitePage | null | undefined, page: SitePage) {
@@ -94,9 +96,12 @@ export function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
   return <header className={styles.nav}>
     <Link href="/" className={styles.navName} {...currentProps(activePage, "home")}>Phan Thị Ý Như</Link>
 
-    <nav className={styles.desktopNav} aria-label="Primary navigation">
-      {menuItems.map((item) => <Link href={item.href} className={activePage === item.page ? styles.navActive : undefined} {...currentProps(activePage, item.page)} key={item.page}>{item.label}</Link>)}
-    </nav>
+    <div className={styles.desktopActions}>
+      <nav className={styles.desktopNav} aria-label="Primary navigation">
+        {menuItems.map((item) => <Link href={item.href} className={activePage === item.page ? styles.navActive : undefined} {...currentProps(activePage, item.page)} key={item.page}><LocalizedText vi={item.vi} en={item.en} /></Link>)}
+      </nav>
+      <LocaleSwitch />
+    </div>
 
     <button
       ref={menuButtonRef}
@@ -105,7 +110,7 @@ export function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
       aria-expanded={menuOpen}
       aria-controls="site-mobile-menu"
       onClick={openMenu}
-    >Menu</button>
+    ><LocalizedText vi="Menu" en="Menu" /></button>
 
     <dialog
       ref={dialogRef}
@@ -117,17 +122,18 @@ export function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
     >
       <div className={styles.dialogHeader}>
         <span className={styles.dialogName}>Phan Thị Ý Như</span>
-        <span className={styles.dialogLabel}>Menu</span>
+        <span className={styles.dialogLabel}><LocalizedText vi="Menu" en="Menu" /></span>
       </div>
       <nav className={styles.dialogNav} aria-label="Mobile navigation">
         {menuItems.map((item, index) => <Link href={item.href} className={styles.dialogLink} {...currentProps(activePage, item.page)} onClick={closeMenu} key={item.page}>
           <span className={styles.dialogLinkInner}>
             <span>{String(index + 1).padStart(2, "0")}</span>
-            <span>{item.label}</span>
+            <span><LocalizedText vi={item.vi} en={item.en} /></span>
           </span>
         </Link>)}
       </nav>
-      <button ref={closeButtonRef} type="button" className={styles.dialogClose} onClick={closeMenu}>Close</button>
+      <div className={styles.dialogLocale}><LocaleSwitch /></div>
+      <button ref={closeButtonRef} type="button" className={styles.dialogClose} onClick={closeMenu}><LocalizedText vi="Đóng" en="Close" /></button>
     </dialog>
   </header>;
 }

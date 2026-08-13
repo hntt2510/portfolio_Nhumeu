@@ -12,6 +12,12 @@ export type ArtworkImageAsset = {
   alt?: string;
 };
 
+const assetVersion = "real-v1";
+
+function artworkImage(file: string) {
+  return `/assets/artworks/${file}?v=${assetVersion}`;
+}
+
 export type Artwork = {
   id: string;
   title: string;
@@ -35,7 +41,7 @@ export const artworks: Artwork[] = [
     id: "work-ve-nha",
     title: "Về Nhà",
     medium: "Oil",
-    image: "/assets/artworks/pic_1.webp",
+    image: artworkImage("pic_1.webp"),
     aspectRatio: 1630 / 2189,
     alt: "Về Nhà",
     provisional: false,
@@ -46,7 +52,7 @@ export const artworks: Artwork[] = [
     id: "work-ban",
     title: "Bận",
     medium: "Oil",
-    image: "/assets/artworks/pic_2.webp",
+    image: artworkImage("pic_2.webp"),
     aspectRatio: 1776 / 2398,
     alt: "Bận",
     provisional: false,
@@ -57,7 +63,7 @@ export const artworks: Artwork[] = [
     id: "work-be",
     title: "Bé",
     medium: "Oil",
-    image: "/assets/artworks/pic_3.webp",
+    image: artworkImage("pic_3.webp"),
     aspectRatio: 2606 / 2171,
     alt: "Bé",
     provisional: false,
@@ -68,7 +74,7 @@ export const artworks: Artwork[] = [
     id: "work-xuong-tau",
     title: "Xưởng Tàu",
     medium: "Oil",
-    image: "/assets/artworks/pic_4.webp",
+    image: artworkImage("pic_4.webp"),
     aspectRatio: 2560 / 1952,
     alt: "Xưởng Tàu",
     provisional: false,
@@ -79,7 +85,7 @@ export const artworks: Artwork[] = [
     id: "work-dau-nang",
     title: "Dấu Nắng",
     medium: "Oil",
-    image: "/assets/artworks/pic_5.webp",
+    image: artworkImage("pic_5.webp"),
     aspectRatio: 1338 / 2562,
     alt: "Dấu Nắng",
     provisional: false,
@@ -90,7 +96,7 @@ export const artworks: Artwork[] = [
     id: "work-tranh-dong-ho",
     title: "Tranh Đông Hồ",
     medium: "Lacquer",
-    image: "/assets/artworks/pic_6.webp",
+    image: artworkImage("pic_6.webp"),
     aspectRatio: 2090 / 2560,
     alt: "Tranh Đông Hồ",
     provisional: false,

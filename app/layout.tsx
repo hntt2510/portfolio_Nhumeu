@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Serif_Display } from "next/font/google";
 import Script from "next/script";
+import { LocaleProvider } from "./components/LocaleProvider";
 import "./globals.css";
 
 const display = Noto_Serif_Display({ subsets: ["latin", "vietnamese"], variable: "--font-display", weight: ["400", "500"] });
@@ -31,7 +32,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           })).observe(document.documentElement, { attributes: true, attributeFilter: [attribute], childList: true, subtree: true });
         })();`}
       </Script>
-      {children}
+      <LocaleProvider>{children}</LocaleProvider>
     </body>
   </html>;
 }

@@ -40,7 +40,7 @@ export const artist: ArtistProfile = {
   bornIn: "Bình Định, Vietnam",
   basedIn: "Ho Chi Minh City, Vietnam",
   major: "Painting",
-  portrait: "/assets/artist/at_1.webp",
+  portrait: "/assets/artist/at_1.webp?v=real-v1",
   biography: "Phan Thị Ý Như was born in 2004 in Bình Định and is currently based in Ho Chi Minh City. She is a third-year Painting student at Ho Chi Minh City University of Fine Arts.\n\nDrawn to painting from an early age, Ý Như is currently exploring different materials and approaches in order to discover the visual language that feels most natural to her developing practice. Her works often begin with close observations of everyday life and the spaces around her — familiar streets, interiors, working environments, people and fleeting moments translated through colour, surface and composition.",
   practice: "At this stage of her practice, Ý Như is paying particular attention to lacquer. Its layered process — building, covering, polishing and gradually revealing the surface — allows the image to develop through both material and time. The shifting relationship between depth, texture and reflected light offers a way of thinking through the image beyond paint alone.",
   education: [{ title: "Ho Chi Minh City University of Fine Arts", institution: "Painting", location: "Third-year student" }],

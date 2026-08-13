@@ -4,6 +4,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { artworks } from "../data/artworks";
 import { IndexArchive } from "./IndexArchive";
 import styles from "./page.module.css";
+import { LocalizedText } from "../components/LocalizedText";
 
 export const metadata: Metadata = {
   title: "Index — Phan Thị Ý Như",
@@ -15,8 +16,8 @@ export default function IndexPage() {
     <main className={styles.page}>
       <SiteHeader activePage="index" />
       <section className={`${styles.intro} motion-reveal`}>
-        <p className={styles.eyebrow}>Archive</p>
-        <h1>Index</h1>
+        <p className={styles.eyebrow}><LocalizedText vi="Lưu trữ" en="Archive" /></p>
+        <h1><LocalizedText vi="Danh mục" en="Index" /></h1>
       </section>
       <IndexArchive artworks={artworks} />
     </main>

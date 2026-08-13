@@ -3,6 +3,7 @@ import { PortfolioMotion } from "../components/PortfolioMotion";
 import { SiteHeader } from "../components/SiteHeader";
 import { artworks } from "../data/artworks";
 import { WorksGallery } from "./WorksGallery";
+import { LocalizedText } from "../components/LocalizedText";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -16,10 +17,10 @@ export default function WorksPage() {
       <SiteHeader activePage="works" />
       <section className={`${styles.intro} motion-reveal`}>
         <div>
-          <h1>Works</h1>
-          <p className={styles.eyebrow}>Selected Works</p>
+          <h1><LocalizedText vi="Tác phẩm" en="Works" /></h1>
+          <p className={styles.eyebrow}><LocalizedText vi="Tác phẩm chọn lọc" en="Selected Works" /></p>
         </div>
-        <p className={styles.introNote}>{artworks.length} works</p>
+        <p className={styles.introNote}>{artworks.length} <LocalizedText vi="tác phẩm" en="works" /></p>
       </section>
       <WorksGallery artworks={artworks} />
     </main>

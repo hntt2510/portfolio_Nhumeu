@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArtworkMedia } from "./ArtworkMedia";
+import { ArtworkMedium } from "./LocalizedArtworkText";
+import { LocalizedText } from "./LocalizedText";
 import type { Artwork } from "../data/artworks";
 import styles from "../page.module.css";
 
@@ -14,8 +16,8 @@ export function ArchiveSection({ artworks }: { artworks: Artwork[] }) {
 
   return <section id="index" className={`${styles.archive} ${styles.movement}`}>
     <div className={styles.archiveIntro}>
-      <p className={styles.eyebrow}>Archive</p>
-      <h2>Selected works</h2>
+      <p className={styles.eyebrow}><LocalizedText vi="Lưu trữ" en="Archive" /></p>
+      <h2><LocalizedText vi="Tác phẩm chọn lọc" en="Selected works" /></h2>
       <Link href={`/works/${selected.id}`} className={styles.archivePreviewLink}><ArtworkMedia src={selected.image} alt={selected.alt ?? selected.title} aspectRatio={selected.aspectRatio} sizes="(max-width: 700px) 70vw, 28vw" className={styles.archivePreview} /></Link>
     </div>
     <div className={styles.archiveList}>
@@ -28,7 +30,7 @@ export function ArchiveSection({ artworks }: { artworks: Artwork[] }) {
       >
         <span>{String(index + 1).padStart(2, "0")}</span>
         <span className={styles.archiveTitle}>{artwork.title}</span>
-        {artwork.medium && <span>{artwork.medium}</span>}
+        {artwork.medium && <span><ArtworkMedium artwork={artwork} /></span>}
         {artwork.year !== undefined && <span>{artwork.year}</span>}
       </Link>)}
     </div>

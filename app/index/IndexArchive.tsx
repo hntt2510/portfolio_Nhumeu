@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArtworkMedia } from "../components/ArtworkMedia";
+import { ArtworkMedium } from "../components/LocalizedArtworkText";
+import { LocalizedText } from "../components/LocalizedText";
 import type { Artwork } from "../data/artworks";
 import styles from "./page.module.css";
 
@@ -64,7 +66,7 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
           >
             <span>{numberFor(artwork, artworks)}</span>
             <span className={styles.rowTitle}>{artwork.title}</span>
-            {artwork.medium && <span>{artwork.medium}</span>}
+            {artwork.medium && <span><ArtworkMedium artwork={artwork} /></span>}
             {artwork.year !== undefined && <span>{artwork.year}</span>}
           </Link>
           <button
@@ -73,10 +75,10 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
             aria-expanded={selectedState}
             aria-controls={previewId}
             onClick={() => selectArtwork(artwork)}
-          >Preview</button>
+          ><LocalizedText vi="Xem trước" en="Preview" /></button>
           {selectedState && <div id={previewId} className={styles.mobilePreview}>
             <ArtworkMedia src={artwork.image} alt={artwork.alt ?? artwork.title} aspectRatio={artwork.aspectRatio} sizes="88vw" className={styles.mobilePreviewArtwork} />
-            <Link href={`/works/${artwork.id}`} className={styles.previewLink}>View selected work</Link>
+            <Link href={`/works/${artwork.id}`} className={styles.previewLink}><LocalizedText vi="Xem tác phẩm" en="View selected work" /></Link>
           </div>}
         </div>;
       })}

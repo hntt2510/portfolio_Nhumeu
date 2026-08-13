@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { ArtworkMedia } from "../../components/ArtworkMedia";
 import { PortfolioMotion } from "../../components/PortfolioMotion";
 import { SiteHeader } from "../../components/SiteHeader";
+import { ArtworkDescription, ArtworkMedium } from "../../components/LocalizedArtworkText";
+import { LocalizedText } from "../../components/LocalizedText";
 import { artworks, getArtworkById, getNextArtwork } from "../../data/artworks";
 import styles from "./page.module.css";
 
@@ -31,10 +33,10 @@ export async function generateMetadata({ params }: DetailPageProps): Promise<Met
 
 function MetadataRail({ artwork }: { artwork: (typeof artworks)[number] }) {
   return <div className={styles.metadataRail}>
-    <Link href="/works" className={styles.backLink}>← Works</Link>
+    <Link href="/works" className={styles.backLink}>← <LocalizedText vi="Tác phẩm" en="Works" /></Link>
     <span className={styles.metadataIndex}>{String(artworks.indexOf(artwork) + 1).padStart(2, "0")}</span>
     <h1>{artwork.title}</h1>
-    {artwork.medium && <span>{artwork.medium}</span>}
+    {artwork.medium && <span><ArtworkMedium artwork={artwork} /></span>}
     {artwork.year !== undefined && <span>{artwork.year}</span>}
     {artwork.dimensions && <span>{artwork.dimensions}</span>}
     {artwork.series && <span className={styles.metadataSeries}>{artwork.series}</span>}
@@ -58,22 +60,21 @@ function DetailMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
       sizes="(max-width: 900px) 90vw, 62vw"
       className={styles.detailArtwork}
     />
-    <span className={styles.detailLabel}>DETAIL / 01</span>
+    <span className={styles.detailLabel}><LocalizedText vi="CHI TIẾT / 01" en="DETAIL / 01" /></span>
   </section>;
 }
 
 function NextMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
   const next = getNextArtwork(artwork);
   const index = artworks.indexOf(next) + 1;
-  const nextMetadata = [next.medium, next.year].filter((value) => value !== undefined).join(" / ");
 
   return <section className={`${styles.nextMovement} motion-reveal`}>
     <Link href={`/works/${next.id}`} className={styles.nextLink}>
       <div className={styles.nextCopy}>
-        <span className={styles.nextEyebrow}>NEXT WORK</span>
+        <span className={styles.nextEyebrow}><LocalizedText vi="TÁC PHẨM TIẾP" en="NEXT WORK" /></span>
         <span className={styles.nextIndex}>{String(index).padStart(2, "0")}</span>
         <h2>{next.title}</h2>
-        {nextMetadata && <span>{nextMetadata}</span>}
+        {next.medium && <span><ArtworkMedium artwork={next} /></span>}
       </div>
       <ArtworkMedia src={next.image} alt={next.alt ?? next.title} aspectRatio={next.aspectRatio} sizes="(max-width: 900px) 90vw, 42vw" className={styles.nextArtwork} />
     </Link>
@@ -92,7 +93,7 @@ export default async function ArtworkDetailPage({ params }: DetailPageProps) {
         <MetadataRail artwork={artwork} />
         <ArtworkMedia src={artwork.image} alt={artwork.alt ?? artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} paperReveal preload sizes="(max-width: 900px) 90vw, 58vw" />
       </section>
-      {artwork.description && <section className={`${styles.description} motion-reveal`}><p>{artwork.description}</p></section>}
+      {artwork.description && <section className={`${styles.description} motion-reveal`}><p><ArtworkDescription artwork={artwork} /></p></section>}
       <DetailMovement artwork={artwork} />
       {artwork.process?.map((item) => <section className={`${styles.processMovement} motion-reveal`} key={item.image}><ArtworkMedia src={item.image} alt={item.alt ?? artwork.alt ?? artwork.title} mode="full" aspectRatio={item.aspectRatio} className={styles.processArtwork} /></section>)}
       <NextMovement artwork={artwork} />
