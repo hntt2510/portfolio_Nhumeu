@@ -38,11 +38,10 @@ under `public/assets/artworks/` and update one record in
 
 ```ts
 {
-  id: "work-13",
+  id: "work-stable-slug",
   title: "Artist-supplied title",
   image: "/assets/artworks/pic_13.webp",
-  aspectRatio: 2 / 3,
-  year: 2026,
+  aspectRatio: 1,
   medium: "Oil",
   dimensions: "Artist-supplied dimensions",
   series: "Artist-supplied series",
@@ -91,6 +90,13 @@ npm run content:audit
 The audit reports width, height, aspect ratio, missing/broken references,
 duplicate paths, naming issues, curation IDs, and optional metadata gaps. It
 does not modify images or data.
+
+For the current confirmed catalogue, the public dataset contains six works:
+Về Nhà, Bận, Bé, Xưởng Tàu, Dấu Nắng and Tranh Đông Hồ. Their medium values
+are Oil, Oil, Oil, Oil, Oil and Lacquer respectively. Unknown year,
+dimensions and series stay absent. `detailFocus` may define a deliberate
+surface crop using percentage coordinates and a zoom value when no real detail
+asset has been supplied.
 
 ## Artist data
 

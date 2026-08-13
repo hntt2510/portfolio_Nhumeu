@@ -34,7 +34,7 @@ function RecordSection({ title, records }: { title: string; records?: typeof art
 export default function AboutPage() {
   const pauseArtwork = requireArtworkById(aboutCuration.artworkPause, "about artwork pause");
   const hasRecords = Boolean(artist.education?.length || artist.exhibitions?.length || artist.awards?.length);
-  const hasContact = Boolean(artist.contact?.email || artist.contact?.instagram || artist.contact?.website);
+  const hasContact = Boolean(artist.contact?.email || artist.contact?.facebook || artist.contact?.instagram || artist.contact?.website);
 
   return <PortfolioMotion>
     <main className={styles.page}>
@@ -46,8 +46,13 @@ export default function AboutPage() {
           <h1>{artist.name}</h1>
           <p className={styles.role}>{artist.role}</p>
           <p className={styles.practiceLine}>{artist.practices.join(" · ")}</p>
+          <div className={styles.facts}>
+            {artist.born && <span>{artist.born}</span>}
+            {artist.bornIn && <span>{artist.bornIn}</span>}
+            {artist.basedIn && <span>{artist.basedIn}</span>}
+          </div>
         </div>
-        <ArtistMedia src={artist.portrait} alt={artist.portrait ? `${artist.name} portrait` : undefined} className={styles.portrait} preload={Boolean(artist.portrait)} sizes="(max-width: 900px) 90vw, 52vw" />
+        <ArtistMedia src={artist.portrait} alt={artist.portrait ? artist.name : undefined} className={styles.portrait} paperReveal preload={Boolean(artist.portrait)} sizes="(max-width: 900px) 90vw, 52vw" />
       </section>
 
       <section className={`${styles.profile} motion-reveal`}>
@@ -66,6 +71,7 @@ export default function AboutPage() {
 
       {artist.statement && <section className={`${styles.textSection} motion-reveal`}><h2>Statement</h2><p>{artist.statement}</p></section>}
       {artist.biography && <section className={`${styles.textSection} motion-reveal`}><h2>Biography</h2><p>{artist.biography}</p></section>}
+      {artist.practice && <section className={`${styles.textSection} motion-reveal`}><h2>Practice</h2><p>{artist.practice}</p></section>}
 
       {hasRecords && <section className={styles.recordsBlock}>
         <h2 className={styles.recordsTitle}>Record</h2>
@@ -86,7 +92,7 @@ export default function AboutPage() {
         </Link>
       </section>
 
-      {hasContact && <section className={`${styles.contact} motion-reveal`}><h2>Contact</h2>{artist.contact?.email && <a href={`mailto:${artist.contact.email}`}>{artist.contact.email}</a>}{artist.contact?.instagram && <a href={artist.contact.instagram}>Instagram</a>}{artist.contact?.website && <a href={artist.contact.website}>Website</a>}</section>}
+      {hasContact && <section className={`${styles.contact} motion-reveal`}><h2>Contact</h2>{artist.contact?.facebook && <a href={artist.contact.facebook} target="_blank" rel="noreferrer">Facebook</a>}{artist.contact?.email && <a href={`mailto:${artist.contact.email}`}>{artist.contact.email}</a>}{artist.contact?.instagram && <a href={artist.contact.instagram}>Instagram</a>}{artist.contact?.website && <a href={artist.contact.website}>Website</a>}</section>}
 
       <footer className={styles.closing}>
         <div><h2>{artist.name}</h2><p>{artist.role}</p></div>

@@ -2,7 +2,7 @@
 .intro { padding: 8vw 4.8vw 4vw; }
 .eyebrow { margin: 0 0 2vw; color: var(--text-muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 .intro h1 { margin: 0; font: 400 clamp(5rem, 10vw, 10rem) / .82 var(--font-display), Georgia, serif; letter-spacing: -.07em; }
-.archiveLayout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 29vw); gap: 7vw; padding: 3vw 4.8vw 13vw; }
+.archiveLayout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 43vw); gap: 7vw; padding: 3vw 4.8vw 13vw; }
 .archiveList { min-width: 0; }
 .rowShell { border-top: 1px solid var(--line); }
 .rowShell:last-child { border-bottom: 1px solid var(--line); }
@@ -10,7 +10,9 @@
 .archiveRow:hover, .archiveRow:focus-visible, .rowSelected .archiveRow { color: var(--text-main); }
 .rowTitle { color: currentColor; font: 400 clamp(1.45rem, 2.2vw, 2.2rem) / 1 var(--font-display), Georgia, serif; }
 .previewColumn { position: sticky; top: 8vw; align-self: start; }
-.previewArtwork { width: 100%; }
+.previewStage { position: relative; width: 100%; aspect-ratio: 1 / 1.15; overflow: hidden; background: var(--surface); }
+.previewLayer { position: absolute; inset: 0; }
+.previewArtwork { width: 100%; height: 100%; min-height: 0; }
 .previewCaption, .previewLink { display: inline-block; margin-top: 14px; color: var(--text-muted); font-size: 12px; transition: color .3s ease; }
 .previewCaption:hover, .previewCaption:focus-visible, .previewLink:hover, .previewLink:focus-visible { color: var(--text-main); }
 .previewToggle, .mobilePreview { display: none; }

@@ -24,3 +24,7 @@ Thumbs.db
 
 # Generated local agent/runtime state
 .codex/
+
+# Local source photographs supplied for content normalization
+ANH/
+ANH.zip

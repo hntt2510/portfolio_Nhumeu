@@ -1,4 +1,10 @@
-export type Medium = "Oil" | "Silk" | "Lacquer" | "Mixed Media";
+export type Medium = "Oil" | "Lacquer";
+
+export type DetailFocus = {
+  x: number;
+  y: number;
+  zoom: number;
+};
 
 export type ArtworkImageAsset = {
   image: string;
@@ -21,21 +27,76 @@ export type Artwork = {
   process?: ArtworkImageAsset[];
   provisional?: boolean;
   alt?: string;
+  detailFocus?: DetailFocus;
 };
 
 export const artworks: Artwork[] = [
-  { id: "work-01", title: "Untitled I", year: 2026, medium: "Oil", dimensions: "Dimensions pending", series: "Studies", image: "/assets/artworks/pic_1.webp", aspectRatio: 2 / 3, featured: true, provisional: true },
-  { id: "work-02", title: "Study I", year: 2025, medium: "Silk", dimensions: "Dimensions pending", series: "Studies", image: "/assets/artworks/pic_2.webp", aspectRatio: 2 / 3, featured: true, provisional: true },
-  { id: "work-03", title: "Untitled II", year: 2025, medium: "Lacquer", dimensions: "Dimensions pending", series: "Material Studies", image: "/assets/artworks/pic_3.webp", aspectRatio: 2 / 3, featured: true, provisional: true },
-  { id: "work-04", title: "Study II", year: 2024, medium: "Mixed Media", dimensions: "Dimensions pending", series: "Studies", image: "/assets/artworks/pic_4.webp", aspectRatio: 2 / 3, featured: true, provisional: true },
-  { id: "work-05", title: "Work No. 05", year: 2024, medium: "Oil", dimensions: "Dimensions pending", series: "Studies", image: "/assets/artworks/pic_5.webp", aspectRatio: 2 / 3, featured: false, provisional: true },
-  { id: "work-06", title: "Untitled III", year: 2023, medium: "Silk", dimensions: "Dimensions pending", series: "Material Studies", image: "/assets/artworks/pic_6.webp", aspectRatio: 2 / 3, featured: false, provisional: true },
-  { id: "work-07", title: "Study III", year: 2023, medium: "Lacquer", dimensions: "Dimensions pending", series: "Studies", image: "/assets/artworks/pic_7.webp", aspectRatio: 2 / 3, featured: false, provisional: true },
-  { id: "work-08", title: "Untitled IV", year: 2022, medium: "Oil", dimensions: "Dimensions pending", series: "Studies", image: "/assets/artworks/pic_8.webp", aspectRatio: 2 / 3, featured: false, provisional: true },
-  { id: "work-09", title: "Study IV", year: 2022, medium: "Silk", dimensions: "Dimensions pending", series: "Material Studies", image: "/assets/artworks/pic_9.webp", aspectRatio: 2 / 3, featured: false, provisional: true },
-  { id: "work-10", title: "Work No. 10", year: 2021, medium: "Lacquer", dimensions: "Dimensions pending", series: "Studies", image: "/assets/artworks/pic_10.webp", aspectRatio: 2 / 3, featured: false, provisional: true },
-  { id: "work-11", title: "Untitled V", year: 2021, medium: "Oil", dimensions: "Dimensions pending", series: "Studies", image: "/assets/artworks/pic_11.webp", aspectRatio: 2 / 3, featured: false, provisional: true },
-  { id: "work-12", title: "Study V", year: 2020, medium: "Mixed Media", dimensions: "Dimensions pending", series: "Material Studies", image: "/assets/artworks/pic_12.webp", aspectRatio: 2 / 3, featured: false, provisional: true },
+  {
+    id: "work-ve-nha",
+    title: "Về Nhà",
+    medium: "Oil",
+    image: "/assets/artworks/pic_1.webp",
+    aspectRatio: 1630 / 2189,
+    alt: "Về Nhà",
+    provisional: false,
+    detailFocus: { x: 46, y: 43, zoom: 1.65 },
+    description: "A narrow path draws the eye through overlapping houses, vegetation and light. Về Nhà holds onto the familiarity of an ordinary place — neither completely still nor dramatic, but close enough to awaken the quiet memory of returning.",
+  },
+  {
+    id: "work-ban",
+    title: "Bận",
+    medium: "Oil",
+    image: "/assets/artworks/pic_2.webp",
+    aspectRatio: 1776 / 2398,
+    alt: "Bận",
+    provisional: false,
+    detailFocus: { x: 50, y: 48, zoom: 1.65 },
+    description: "Figures gather around fabric, bodies and unfinished gestures, creating a space defined by activity rather than stillness. Bận observes the small overlaps of attention and movement that accumulate when many things seem to be happening at once.",
+  },
+  {
+    id: "work-be",
+    title: "Bé",
+    medium: "Oil",
+    image: "/assets/artworks/pic_3.webp",
+    aspectRatio: 2606 / 2171,
+    alt: "Bé",
+    provisional: false,
+    detailFocus: { x: 42, y: 47, zoom: 1.6 },
+    description: "A fleeting moment of childhood is held through colour, movement and the proximity of everyday life. The scene feels lively yet tender, as though a brief fragment of play has been kept from disappearing into the rest of the day.",
+  },
+  {
+    id: "work-xuong-tau",
+    title: "Xưởng Tàu",
+    medium: "Oil",
+    image: "/assets/artworks/pic_4.webp",
+    aspectRatio: 2560 / 1952,
+    alt: "Xưởng Tàu",
+    provisional: false,
+    detailFocus: { x: 53, y: 43, zoom: 1.65 },
+    description: "Scaffolding, structures and working figures form a continuous rhythm across the industrial space. Xưởng Tàu looks at the relationship between people and an environment being built, repaired and transformed piece by piece.",
+  },
+  {
+    id: "work-dau-nang",
+    title: "Dấu Nắng",
+    medium: "Oil",
+    image: "/assets/artworks/pic_5.webp",
+    aspectRatio: 1338 / 2562,
+    alt: "Dấu Nắng",
+    provisional: false,
+    detailFocus: { x: 55, y: 58, zoom: 1.7 },
+    description: "Light passes across roofs, trees and a sloping path, leaving behind a temporary trace on an otherwise familiar place. Dấu Nắng is less concerned with locating a specific landscape than with the way light can briefly turn an ordinary space into a visual memory.",
+  },
+  {
+    id: "work-tranh-dong-ho",
+    title: "Tranh Đông Hồ",
+    medium: "Lacquer",
+    image: "/assets/artworks/pic_6.webp",
+    aspectRatio: 2090 / 2560,
+    alt: "Tranh Đông Hồ",
+    provisional: false,
+    detailFocus: { x: 57, y: 44, zoom: 1.75 },
+    description: "A familiar folk-image vocabulary is carried into the depth and reflective surface of lacquer. The work retains a decorative sense of traditional imagery while allowing layers, texture and changing light to reshape how the image is experienced.",
+  },
 ];
 
 export function getArtworkById(id: string) {
@@ -66,21 +127,18 @@ export function getArtworkYearRange(items: Artwork[] = artworks) {
 }
 
 export const practiceGroups = [
-  { medium: "Oil" as const, artworkId: "work-01" },
-  { medium: "Silk" as const, artworkId: "work-02" },
-  { medium: "Lacquer" as const, artworkId: "work-03" },
-  { medium: "Mixed Media" as const, artworkId: "work-04" },
+  { medium: "Oil" as const, artworkId: "work-ban" },
+  { medium: "Lacquer" as const, artworkId: "work-tranh-dong-ho" },
 ];
 
 export const homepageCuration = {
-  opening: "work-01",
-  featured: "work-01",
-  contrast: "work-02",
-  sequence: ["work-03", "work-04", "work-05"],
-  archive: ["work-01", "work-02", "work-03", "work-04", "work-05", "work-06", "work-07", "work-08"],
-  yearRange: "2023—2026",
+  opening: "work-ve-nha",
+  featured: "work-ve-nha",
+  contrast: "work-be",
+  sequence: ["work-tranh-dong-ho", "work-xuong-tau", "work-dau-nang"],
+  archive: ["work-ve-nha", "work-ban", "work-be", "work-xuong-tau", "work-dau-nang", "work-tranh-dong-ho"],
 };
 
 export const aboutCuration = {
-  artworkPause: "work-02",
+  artworkPause: "work-ban",
 };

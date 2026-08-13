@@ -6,7 +6,7 @@ import { ArtworkMedia } from "../components/ArtworkMedia";
 import type { Artwork, Medium } from "../data/artworks";
 import styles from "./page.module.css";
 
-const filters: Array<"All" | Medium> = ["All", "Oil", "Silk", "Lacquer", "Mixed Media"];
+const filters: Array<"All" | Medium> = ["All", "Oil", "Lacquer"];
 
 function artworkNumber(index: number) {
   return String(index + 1).padStart(2, "0");
@@ -39,6 +39,7 @@ export function WorksGallery({ artworks }: { artworks: Artwork[] }) {
             preload={index === 0}
             sizes="(max-width: 700px) 88vw, (max-width: 1100px) 62vw, 38vw"
             className={styles.galleryArtwork}
+            paperReveal
           />
           <div className={styles.galleryMeta}>
             <span className={styles.galleryNumber}>{artworkNumber(artworks.indexOf(artwork))}</span>

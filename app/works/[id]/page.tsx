@@ -43,8 +43,9 @@ function MetadataRail({ artwork }: { artwork: (typeof artworks)[number] }) {
 
 function DetailMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
   const suppliedDetail = artwork.details?.[0];
-  const detailImage = suppliedDetail?.image ?? (artwork.provisional ? artwork.image : undefined);
-  if (!detailImage) return null;
+  const detailImage = suppliedDetail?.image ?? artwork.image;
+  const focus = artwork.detailFocus;
+  if (!suppliedDetail && !focus) return null;
 
   return <section className={`${styles.detailMovement} motion-reveal`}>
     <div className={styles.detailRule} />
@@ -52,7 +53,8 @@ function DetailMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
       src={detailImage}
       alt={suppliedDetail?.alt ?? artwork.alt ?? artwork.title}
       mode="crop"
-      aspectRatio={suppliedDetail?.aspectRatio}
+      aspectRatio={suppliedDetail?.aspectRatio ?? 1.4}
+      focus={suppliedDetail ? undefined : focus}
       sizes="(max-width: 900px) 90vw, 62vw"
       className={styles.detailArtwork}
     />
@@ -88,7 +90,7 @@ export default async function ArtworkDetailPage({ params }: DetailPageProps) {
       <SiteHeader activePage="works" />
       <section className={`${styles.opening} motion-reveal`}>
         <MetadataRail artwork={artwork} />
-        <ArtworkMedia src={artwork.image} alt={artwork.alt ?? artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} preload sizes="(max-width: 900px) 90vw, 58vw" />
+        <ArtworkMedia src={artwork.image} alt={artwork.alt ?? artwork.title} aspectRatio={artwork.aspectRatio} className={styles.primaryArtwork} paperReveal preload sizes="(max-width: 900px) 90vw, 58vw" />
       </section>
       {artwork.description && <section className={`${styles.description} motion-reveal`}><p>{artwork.description}</p></section>}
       <DetailMovement artwork={artwork} />

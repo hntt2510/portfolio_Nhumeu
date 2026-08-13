@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./ArtistMedia.module.css";
 
-type ArtistMediaProps = {
+export type ArtistMediaProps = {
   src?: string;
   alt?: string;
   aspectRatio?: number;
@@ -11,10 +11,11 @@ type ArtistMediaProps = {
   className?: string;
   preload?: boolean;
   sizes?: string;
+  paperReveal?: boolean;
 };
 
-export function ArtistMedia({ src, alt = "", aspectRatio = 3 / 4, mode = "crop", className = "", preload = false, sizes }: ArtistMediaProps) {
-  return <div className={`${styles.media} ${className}`} style={{ aspectRatio }}>
+export function ArtistMedia({ src, alt = "", aspectRatio = 3 / 4, mode = "crop", className = "", preload = false, sizes, paperReveal = false }: ArtistMediaProps) {
+  return <div className={`${styles.media} ${paperReveal ? `${styles.paperReveal} paper-reveal` : ""} ${className}`} style={{ aspectRatio }}>
     {src && <Image
       src={src}
       alt={alt}
@@ -26,6 +27,7 @@ export function ArtistMedia({ src, alt = "", aspectRatio = 3 / 4, mode = "crop",
         event.currentTarget.style.display = "none";
         event.currentTarget.parentElement?.classList.add(styles.fallback);
       }}
-    />}
+      />}
+    {paperReveal && <span className={`${styles.paperMatte} paper-matte`} aria-hidden="true" />}
   </div>;
 }

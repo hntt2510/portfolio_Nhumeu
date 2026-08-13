@@ -116,6 +116,11 @@ function validateArtworkRecord(artwork, index) {
     if (artwork?.[field] === undefined || artwork?.[field] === "") errors.push(`${label}: missing required field ${field}`);
   }
   if (artwork?.image) addReference(artwork.image, `${label}.image`);
+  if (artwork?.detailFocus) {
+    const { x, y, zoom } = artwork.detailFocus;
+    if (![x, y, zoom].every((value) => typeof value === "number" && Number.isFinite(value))) errors.push(`${label}.detailFocus: x, y and zoom must be finite numbers`);
+    if (x < 0 || x > 100 || y < 0 || y > 100 || zoom < 1) errors.push(`${label}.detailFocus: x/y must be 0–100 and zoom must be >= 1`);
+  }
   if (artwork?.details) artwork.details.forEach((asset, assetIndex) => addReference(asset.image, `${label}.details[${assetIndex}]`));
   if (artwork?.process) artwork.process.forEach((asset, assetIndex) => addReference(asset.image, `${label}.process[${assetIndex}]`));
 }

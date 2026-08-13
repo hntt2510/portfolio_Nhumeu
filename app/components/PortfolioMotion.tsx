@@ -19,6 +19,7 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
     const context = gsap.context(() => {
       mediaQuery.add("(prefers-reduced-motion: reduce)", () => {
         gsap.set(".motion-reveal", { clearProps: "all" });
+        gsap.set(".paper-matte", { clipPath: "inset(0 0 100% 0)" });
       });
 
       mediaQuery.add("(prefers-reduced-motion: no-preference)", () => {
@@ -41,12 +42,34 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
           });
         });
 
+        gsap.utils.toArray<HTMLElement>(".paper-reveal").forEach((element) => {
+          const matte = element.querySelector<HTMLElement>(".paper-matte");
+          if (!matte) return;
+          gsap.set(matte, { clipPath: "inset(0 0 0 0)" });
+          gsap.to(matte, {
+            clipPath: "inset(0 0 100% 0)",
+            duration: 0.85,
+            ease: "power2.inOut",
+            scrollTrigger: { trigger: element, start: "top 86%", once: true },
+          });
+        });
+
         gsap.utils.toArray<HTMLElement>(".artwork-drift").forEach((element) => {
-          gsap.fromTo(element, { scale: 0.985, opacity: 0.72 }, {
-            scale: 1,
-            opacity: 1,
+          gsap.fromTo(element, { y: 12 }, {
+            y: 0,
             ease: "none",
             scrollTrigger: { trigger: element, start: "top 84%", end: "bottom 20%", scrub: 1 },
+          });
+        });
+
+        gsap.utils.toArray<HTMLElement>(".surface-focus").forEach((element) => {
+          const image = element.querySelector<HTMLElement>("img");
+          const zoom = Number(element.dataset.focusZoom) || 1;
+          if (!image || zoom <= 1) return;
+          gsap.fromTo(image, { scale: zoom * 1.04 }, {
+            scale: zoom,
+            ease: "none",
+            scrollTrigger: { trigger: element, start: "top 88%", end: "bottom 30%", scrub: 1 },
           });
         });
 

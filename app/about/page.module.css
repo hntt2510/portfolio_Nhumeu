@@ -5,6 +5,7 @@
 .opening h1 { max-width: 720px; margin: 0; font: 400 clamp(4rem, 7.5vw, 8.5rem) / .88 var(--font-display), Georgia, serif; letter-spacing: -.065em; }
 .role { margin: 2.4vw 0 0; color: var(--text-muted); font-size: 18px; }
 .practiceLine { margin: 4vw 0 0; color: var(--text-muted); font-size: 13px; }
+.facts { display: flex; flex-direction: column; gap: 5px; margin-top: 2.5vw; color: var(--text-muted); font-size: 13px; line-height: 1.35; }
 .portrait { width: 100%; min-height: 560px; }
 .profile { display: grid; grid-template-columns: 1fr 1fr; gap: 13vw; padding: 11vw 4.8vw 12vw; background: var(--bg-light); }
 .profileHeading h2, .practice h2, .textSection h2, .recordsTitle, .recordSection h2, .contact h2 { margin: 0; font: 400 clamp(2.4rem, 4vw, 4.7rem) / .94 var(--font-display), Georgia, serif; letter-spacing: -.055em; }
@@ -14,6 +15,7 @@
 .practiceList span { padding: 17px 0; border-bottom: 1px solid var(--line); color: var(--text-muted); font: 400 clamp(1.35rem, 2vw, 2rem) / 1 var(--font-display), Georgia, serif; }
 .textSection { padding: 11vw 25vw 12vw 29vw; }
 .textSection p { max-width: 580px; margin: 3vw 0 0; font: 400 clamp(1.25rem, 1.8vw, 1.8rem) / 1.45 var(--font-sans), Arial, sans-serif; }
+.textSection p { white-space: pre-line; }
 .recordsBlock { padding: 10vw 4.8vw 12vw; background: var(--paper); }
 .recordsTitle { margin-bottom: 8vw; }
 .recordSection { margin-top: 7vw; }
@@ -46,6 +48,7 @@
   .opening h1 { font-size: clamp(3.5rem, 15vw, 6rem); }
   .role { margin-top: 6vw; font-size: 16px; }
   .practiceLine { margin-top: 8vw; font-size: 12px; line-height: 1.5; }
+  .facts { margin-top: 8vw; font-size: 12px; }
   .portrait { min-height: 108vw; }
   .profile { display: block; padding: 20vw 5vw 24vw; }
   .profileHeading p:last-child { margin-top: 12px; }
