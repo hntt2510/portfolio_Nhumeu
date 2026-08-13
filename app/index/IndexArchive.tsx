@@ -27,15 +27,17 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
     setSelected(artwork);
   }
 
-  useGSAP((_, contextSafe) => {
+  useGSAP(() => {
     if (!previewRef.current || !selected || !previous || previous.id === selected.id) return;
-    const finishSelection = contextSafe ? contextSafe(() => setPrevious(selected)) : () => setPrevious(selected);
     const outgoing = previewRef.current.querySelector<HTMLElement>("[data-preview-layer='outgoing']");
     const incoming = previewRef.current.querySelector<HTMLElement>("[data-preview-layer='incoming']");
     if (!outgoing || !incoming) return;
 
     const mediaQuery = gsap.matchMedia();
-    mediaQuery.add("(prefers-reduced-motion: reduce)", finishSelection);
+    mediaQuery.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(outgoing, { autoAlpha: 0 });
+      gsap.set(incoming, { autoAlpha: 1, scale: 1 });
+    });
     mediaQuery.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(outgoing, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.45, ease: "power2.out", overwrite: "auto" });
       gsap.fromTo(incoming, { autoAlpha: 0, scale: 1.02 }, {
@@ -44,12 +46,11 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
         duration: 0.45,
         ease: "power2.out",
         overwrite: "auto",
-        onComplete: finishSelection,
       });
     });
 
     return () => mediaQuery.revert();
-  }, { dependencies: [selected?.id], scope: previewRef, revertOnUpdate: true });
+  }, { dependencies: [selected?.id, previous?.id], scope: previewRef, revertOnUpdate: true });
 
   if (!selected) return null;
 
