@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArtworkMedia } from "../components/ArtworkMedia";
-import { ArtworkMedium } from "../components/LocalizedArtworkText";
+import { ArtworkMedium, ArtworkTitle } from "../components/LocalizedArtworkText";
 import { LocalizedText } from "../components/LocalizedText";
 import type { Artwork, Medium } from "../data/artworks";
 import styles from "./page.module.css";
@@ -45,7 +45,7 @@ export function WorksGallery({ artworks }: { artworks: Artwork[] }) {
           />
           <div className={styles.galleryMeta}>
             <span className={styles.galleryNumber}>{artworkNumber(artworks.indexOf(artwork))}</span>
-            <span className={styles.galleryTitle}>{artwork.title}</span>
+            <span className={styles.galleryTitle}><ArtworkTitle artwork={artwork} /></span>
             {artwork.medium && <span><ArtworkMedium artwork={artwork} /></span>}
             {artwork.year !== undefined && <span>{artwork.year}</span>}
           </div>

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArtworkMedia } from "../../components/ArtworkMedia";
 import { PortfolioMotion } from "../../components/PortfolioMotion";
 import { SiteHeader } from "../../components/SiteHeader";
-import { ArtworkDescription, ArtworkMedium } from "../../components/LocalizedArtworkText";
+import { ArtworkDescription, ArtworkMedium, ArtworkTitle } from "../../components/LocalizedArtworkText";
 import { LocalizedText } from "../../components/LocalizedText";
 import { artworks, getArtworkById, getNextArtwork } from "../../data/artworks";
 import styles from "./page.module.css";
@@ -35,7 +35,7 @@ function MetadataRail({ artwork }: { artwork: (typeof artworks)[number] }) {
   return <div className={styles.metadataRail}>
     <Link href="/works" className={styles.backLink}>← <LocalizedText vi="Tác phẩm" en="Works" /></Link>
     <span className={styles.metadataIndex}>{String(artworks.indexOf(artwork) + 1).padStart(2, "0")}</span>
-    <h1>{artwork.title}</h1>
+    <h1><ArtworkTitle artwork={artwork} /></h1>
     {artwork.medium && <span><ArtworkMedium artwork={artwork} /></span>}
     {artwork.year !== undefined && <span>{artwork.year}</span>}
     {artwork.dimensions && <span>{artwork.dimensions}</span>}
@@ -73,7 +73,7 @@ function NextMovement({ artwork }: { artwork: (typeof artworks)[number] }) {
       <div className={styles.nextCopy}>
         <span className={styles.nextEyebrow}><LocalizedText vi="TÁC PHẨM TIẾP" en="NEXT WORK" /></span>
         <span className={styles.nextIndex}>{String(index).padStart(2, "0")}</span>
-        <h2>{next.title}</h2>
+        <h2><ArtworkTitle artwork={next} /></h2>
         {next.medium && <span><ArtworkMedium artwork={next} /></span>}
       </div>
       <ArtworkMedia src={next.image} alt={next.alt ?? next.title} aspectRatio={next.aspectRatio} sizes="(max-width: 900px) 90vw, 42vw" className={styles.nextArtwork} />

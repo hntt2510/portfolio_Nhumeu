@@ -35,6 +35,11 @@ export function ArtworkMedium({ artwork }: { artwork: Artwork }) {
   return <>{locale === "vi" ? translations[artwork.id]?.medium ?? artwork.medium : artwork.medium}</>;
 }
 
+export function ArtworkTitle({ artwork }: { artwork: Artwork }) {
+  const { locale } = useLocale();
+  return <>{locale === "en" ? artwork.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : artwork.title}</>;
+}
+
 export function ArtworkDescription({ artwork }: { artwork: Artwork }) {
   const { locale } = useLocale();
   return <>{locale === "vi" ? translations[artwork.id]?.description ?? artwork.description : artwork.description}</>;

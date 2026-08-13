@@ -7,26 +7,28 @@ import { SiteHeader } from "../components/SiteHeader";
 import { artist } from "../data/artist";
 import { aboutCuration, requireArtworkById } from "../data/artworks";
 import styles from "./page.module.css";
-import { ArtworkMedium } from "../components/LocalizedArtworkText";
+import { ArtworkMedium, ArtworkTitle } from "../components/LocalizedArtworkText";
 import { LocalizedText } from "../components/LocalizedText";
+import { ArtistFacts, ArtistName, ArtistRole } from "../components/LocalizedArtistText";
 
 export const metadata: Metadata = {
   title: "About — Phan Thị Ý Như",
   description: "About visual artist Phan Thị Ý Như.",
 };
 
-function RecordSection({ title, records }: { title: string; records?: typeof artist.education }) {
+function RecordSection() {
+  const records = artist.education;
   if (!records?.length) return null;
 
   return <section className={`${styles.recordSection} motion-reveal`}>
-    <h2>{title}</h2>
+    <h2><LocalizedText vi="Học vấn" en="Education" /></h2>
     <div className={styles.records}>
       {records.map((record, index) => <div className={styles.record} key={`${record.title}-${index}`}>
         {record.year && <span>{record.year}</span>}
         <div>
-          <strong>{record.title}</strong>
-          {(record.institution || record.venue || record.organization) && <span>{record.institution ?? record.venue ?? record.organization}</span>}
-          {record.location && <span>{record.location}</span>}
+          <strong><LocalizedText vi="Trường Đại học Mỹ thuật Thành phố Hồ Chí Minh" en={record.title} /></strong>
+          {(record.institution || record.venue || record.organization) && <span><LocalizedText vi="Hội hoạ" en={record.institution ?? record.venue ?? record.organization} /></span>}
+          {record.location && <span><LocalizedText vi="Sinh viên năm ba" en={record.location} /></span>}
         </div>
       </div>)}
     </div>
@@ -35,7 +37,7 @@ function RecordSection({ title, records }: { title: string; records?: typeof art
 
 export default function AboutPage() {
   const pauseArtwork = requireArtworkById(aboutCuration.artworkPause, "about artwork pause");
-  const hasRecords = Boolean(artist.education?.length || artist.exhibitions?.length || artist.awards?.length);
+  const hasRecords = Boolean(artist.education?.length);
   const hasContact = Boolean(artist.contact?.email || artist.contact?.facebook || artist.contact?.instagram || artist.contact?.website);
 
   return <PortfolioMotion>
@@ -45,13 +47,11 @@ export default function AboutPage() {
       <section className={`${styles.opening} motion-reveal`}>
         <div className={styles.openingCopy}>
           <p className={styles.eyebrow}><LocalizedText vi="Giới thiệu" en="About" /></p>
-          <h1>{artist.name}</h1>
-          <p className={styles.role}>{artist.role}</p>
-          <p className={styles.practiceLine}>{artist.practices.join(" · ")}</p>
+          <h1><ArtistName /></h1>
+          <p className={styles.role}><ArtistRole /></p>
+          <p className={styles.practiceLine}><LocalizedText vi="Sơn dầu · Sơn mài" en="Oil · Lacquer" /></p>
           <div className={styles.facts}>
-            {artist.born && <span>{artist.born}</span>}
-            {artist.bornIn && <span>{artist.bornIn}</span>}
-            {artist.basedIn && <span>{artist.basedIn}</span>}
+            <ArtistFacts />
           </div>
         </div>
         <ArtistMedia src={artist.portrait} alt={artist.portrait ? artist.name : undefined} className={styles.portrait} paperReveal preload={Boolean(artist.portrait)} sizes="(max-width: 900px) 90vw, 52vw" />
@@ -59,14 +59,15 @@ export default function AboutPage() {
 
       <section className={`${styles.profile} motion-reveal`}>
         <div className={styles.profileHeading}>
-          <p className={styles.eyebrow}>Profile</p>
-          <h2>{artist.name}</h2>
-          <p><LocalizedText vi="Nghệ sĩ thị giác" en={artist.role} /></p>
+          <p className={styles.eyebrow}><LocalizedText vi="Hồ sơ" en="Profile" /></p>
+          <h2><ArtistName /></h2>
+          <p><ArtistRole /></p>
         </div>
         <div className={styles.practice}>
           <h2><LocalizedText vi="Thực hành" en="Practice" /></h2>
           <div className={styles.practiceList}>
-            {artist.practices.map((practice) => <span key={practice}>{practice}</span>)}
+            <span><LocalizedText vi="Sơn dầu" en="Oil" /></span>
+            <span><LocalizedText vi="Sơn mài" en="Lacquer" /></span>
           </div>
         </div>
       </section>
@@ -77,16 +78,14 @@ export default function AboutPage() {
 
       {hasRecords && <section className={styles.recordsBlock}>
         <h2 className={styles.recordsTitle}><LocalizedText vi="Thông tin" en="Record" /></h2>
-        <RecordSection title="Education" records={artist.education} />
-        <RecordSection title="Selected Exhibitions" records={artist.exhibitions} />
-        <RecordSection title="Awards" records={artist.awards} />
+        <RecordSection />
       </section>}
 
       <section className={`${styles.artworkPause} motion-reveal`}>
         <div className={styles.pauseCopy}>
           <p className={styles.eyebrow}><LocalizedText vi="Tác phẩm chọn lọc" en="Selected work" /></p>
           <span className={styles.pauseIndex}>02</span>
-          <h2>{pauseArtwork.title}</h2>
+          <h2><ArtworkTitle artwork={pauseArtwork} /></h2>
           {pauseArtwork.medium && <p><ArtworkMedium artwork={pauseArtwork} /></p>}
         </div>
         <Link href={`/works/${pauseArtwork.id}`} className={styles.pauseLink}>
@@ -97,7 +96,7 @@ export default function AboutPage() {
       {hasContact && <section className={`${styles.contact} motion-reveal`}><h2><LocalizedText vi="Liên hệ" en="Contact" /></h2>{artist.contact?.facebook && <a href={artist.contact.facebook} target="_blank" rel="noreferrer">Facebook</a>}{artist.contact?.email && <a href={`mailto:${artist.contact.email}`}>{artist.contact.email}</a>}{artist.contact?.instagram && <a href={artist.contact.instagram}>Instagram</a>}{artist.contact?.website && <a href={artist.contact.website}>Website</a>}</section>}
 
       <footer className={styles.closing}>
-        <div><h2>{artist.name}</h2><p><LocalizedText vi="Nghệ sĩ thị giác" en={artist.role} /></p></div>
+        <div><h2><ArtistName /></h2><p><ArtistRole /></p></div>
         <nav aria-label="Footer navigation"><Link href="/works"><LocalizedText vi="Tác phẩm" en="Works" /></Link><Link href="/index"><LocalizedText vi="Danh mục" en="Index" /></Link><Link href="/about" aria-current="page"><LocalizedText vi="Giới thiệu" en="About" /></Link></nav>
       </footer>
     </main>

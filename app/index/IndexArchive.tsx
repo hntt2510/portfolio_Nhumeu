@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArtworkMedia } from "../components/ArtworkMedia";
-import { ArtworkMedium } from "../components/LocalizedArtworkText";
+import { ArtworkMedium, ArtworkTitle } from "../components/LocalizedArtworkText";
 import { LocalizedText } from "../components/LocalizedText";
 import type { Artwork } from "../data/artworks";
 import styles from "./page.module.css";
@@ -65,7 +65,7 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
             onFocus={() => selectArtwork(artwork)}
           >
             <span>{numberFor(artwork, artworks)}</span>
-            <span className={styles.rowTitle}>{artwork.title}</span>
+            <span className={styles.rowTitle}><ArtworkTitle artwork={artwork} /></span>
             {artwork.medium && <span><ArtworkMedium artwork={artwork} /></span>}
             {artwork.year !== undefined && <span>{artwork.year}</span>}
           </Link>
@@ -88,7 +88,7 @@ export function IndexArchive({ artworks }: { artworks: Artwork[] }) {
         {previous && previous.id !== selected.id && <div className={styles.previewLayer} data-preview-layer="outgoing"><ArtworkMedia src={previous.image} alt={previous.alt ?? previous.title} aspectRatio={previous.aspectRatio} sizes="43vw" className={styles.previewArtwork} /></div>}
         <div className={styles.previewLayer} data-preview-layer="incoming"><ArtworkMedia src={selected.image} alt={selected.alt ?? selected.title} aspectRatio={selected.aspectRatio} sizes="43vw" className={styles.previewArtwork} /></div>
       </div>
-      <Link href={`/works/${selected.id}`} className={styles.previewCaption}>{numberFor(selected, artworks)} / {selected.title}</Link>
+      <Link href={`/works/${selected.id}`} className={styles.previewCaption}>{numberFor(selected, artworks)} / <ArtworkTitle artwork={selected} /></Link>
     </aside>
   </div>;
 }

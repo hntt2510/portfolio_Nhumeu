@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArtworkMedia } from "./ArtworkMedia";
 import { ArtworkMedium } from "./LocalizedArtworkText";
+import { ArtworkTitle } from "./LocalizedArtworkText";
 import { LocalizedText } from "./LocalizedText";
 import type { Artwork } from "../data/artworks";
 import styles from "../page.module.css";
@@ -29,7 +30,7 @@ export function ArchiveSection({ artworks }: { artworks: Artwork[] }) {
         onFocus={() => setSelected(artwork)}
       >
         <span>{String(index + 1).padStart(2, "0")}</span>
-        <span className={styles.archiveTitle}>{artwork.title}</span>
+        <span className={styles.archiveTitle}><ArtworkTitle artwork={artwork} /></span>
         {artwork.medium && <span><ArtworkMedium artwork={artwork} /></span>}
         {artwork.year !== undefined && <span>{artwork.year}</span>}
       </Link>)}

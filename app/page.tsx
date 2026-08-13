@@ -3,7 +3,8 @@ import { PortfolioMotion } from "./components/PortfolioMotion";
 import { ArtworkMedia } from "./components/ArtworkMedia";
 import { ArchiveSection } from "./components/ArchiveSection";
 import { SiteHeader } from "./components/SiteHeader";
-import { ArtworkMedium } from "./components/LocalizedArtworkText";
+import { ArtworkMedium, ArtworkTitle } from "./components/LocalizedArtworkText";
+import { ArtistName, ArtistRole } from "./components/LocalizedArtistText";
 import { LocalizedText } from "./components/LocalizedText";
 import { artworks, homepageCuration, practiceGroups, resolveArtworkIds, requireArtworkById } from "./data/artworks";
 import styles from "./page.module.css";
@@ -11,7 +12,7 @@ import styles from "./page.module.css";
 function Metadata({ artwork, index }: { artwork: (typeof artworks)[number]; index?: string }) {
   return <div className={styles.metadata}>
     {index && <span className={styles.metadataIndex}>{index}</span>}
-    <span className={styles.metadataTitle}>{artwork.title}</span>
+    <span className={styles.metadataTitle}><ArtworkTitle artwork={artwork} /></span>
     {artwork.medium && <span><ArtworkMedium artwork={artwork} /></span>}
     {artwork.year !== undefined && <span>{artwork.year}</span>}
     {artwork.dimensions && <span>{artwork.dimensions}</span>}
@@ -31,9 +32,9 @@ export default function HomePage() {
       <SiteHeader activePage="home" />
 
       <section id="top" className={`${styles.opening} ${styles.movement}`}>
-        <div className={styles.openingName}><h1>Phan Thị Ý Như</h1></div>
+        <div className={styles.openingName}><h1><ArtistName /></h1></div>
         <Link href={`/works/${opening.id}`} className={`${styles.artworkLink} ${styles.openingArtworkLink}`}><ArtworkMedia src={opening.image} alt={opening.alt ?? opening.title} aspectRatio={opening.aspectRatio} className={styles.openingArtwork} paperReveal preload sizes="(max-width: 700px) 88vw, 52vw" /></Link>
-        <div className={styles.openingFooter}><span><LocalizedText vi="Nghệ sĩ thị giác" en="Visual Artist" /></span><span><LocalizedText vi="Tác phẩm chọn lọc" en="Selected Works" /></span></div>
+        <div className={styles.openingFooter}><span><ArtistRole /></span><span><LocalizedText vi="Tác phẩm chọn lọc" en="Selected Works" /></span></div>
       </section>
 
       <section id="works" className={`${styles.featured} ${styles.movement} motion-reveal`}>
@@ -64,7 +65,7 @@ export default function HomePage() {
 
       <ArchiveSection artworks={archive} />
 
-      <footer id="about" className={`${styles.closing} ${styles.movement}`}><div><h2>Phan Thị Ý Như</h2><p><LocalizedText vi="Nghệ sĩ thị giác" en="Visual Artist" /></p></div><nav aria-label="Footer navigation"><Link href="/works"><LocalizedText vi="Tác phẩm" en="Works" /></Link><Link href="/index"><LocalizedText vi="Danh mục" en="Index" /></Link><Link href="/about"><LocalizedText vi="Giới thiệu" en="About" /></Link></nav></footer>
+      <footer id="about" className={`${styles.closing} ${styles.movement}`}><div><h2><ArtistName /></h2><p><ArtistRole /></p></div><nav aria-label="Footer navigation"><Link href="/works"><LocalizedText vi="Tác phẩm" en="Works" /></Link><Link href="/index"><LocalizedText vi="Danh mục" en="Index" /></Link><Link href="/about"><LocalizedText vi="Giới thiệu" en="About" /></Link></nav></footer>
     </main>
   </PortfolioMotion>;
 }

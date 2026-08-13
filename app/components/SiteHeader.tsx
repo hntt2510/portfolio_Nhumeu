@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { LocalizedText } from "./LocalizedText";
+import { ArtistName } from "./LocalizedArtistText";
 import styles from "./SiteHeader.module.css";
 
 export type SitePage = "home" | "works" | "index" | "about";
@@ -94,7 +95,7 @@ export function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
   }
 
   return <header className={styles.nav}>
-    <Link href="/" className={styles.navName} {...currentProps(activePage, "home")}>Phan Thị Ý Như</Link>
+    <Link href="/" className={styles.navName} {...currentProps(activePage, "home")}><ArtistName /></Link>
 
     <div className={styles.desktopActions}>
       <nav className={styles.desktopNav} aria-label="Primary navigation">
@@ -121,7 +122,7 @@ export function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
       onClose={() => setMenuOpen(false)}
     >
       <div className={styles.dialogHeader}>
-        <span className={styles.dialogName}>Phan Thị Ý Như</span>
+        <span className={styles.dialogName}><ArtistName /></span>
         <span className={styles.dialogLabel}><LocalizedText vi="Menu" en="Menu" /></span>
       </div>
       <nav className={styles.dialogNav} aria-label="Mobile navigation">
