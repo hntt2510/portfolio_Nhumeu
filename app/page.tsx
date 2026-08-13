@@ -41,7 +41,7 @@ export default function HomePage() {
         <div className={styles.sectionHeading}><span><LocalizedText vi="Tác phẩm chọn lọc" en="Selected work" /></span><span>01</span></div>
         <div className={styles.featuredGrid}>
           <Metadata artwork={featured} index="01" />
-        <Link href={`/works/${featured.id}`} className={`${styles.artworkLink} ${styles.featuredArtworkLink} artwork-drift`}><ArtworkMedia src={featured.image} alt={featured.alt ?? featured.title} aspectRatio={featured.aspectRatio} sizes="(max-width: 700px) 92vw, 70vw" className={styles.featuredArtwork} paperReveal /></Link>
+        <Link href={`/works/${featured.id}`} className={`${styles.artworkLink} ${styles.featuredArtworkLink} ${featured.id === "work-ve-nha" ? styles.featuredArtworkLinkVeNha : ""} artwork-drift`}><ArtworkMedia src={featured.image} alt={featured.alt ?? featured.title} aspectRatio={featured.aspectRatio} sizes="(max-width: 700px) 92vw, 70vw" className={styles.featuredArtwork} paperReveal /></Link>
         </div>
       </section>
 

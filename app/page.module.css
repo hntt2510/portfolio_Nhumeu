@@ -15,6 +15,8 @@
 .featured { background: var(--bg-light); }
 .featuredGrid { display: grid; grid-template-columns: 19% 1fr; gap: 4.3vw; margin-top: 4.5vw; }
 .featuredArtworkLink { min-height: 64vw; max-height: 880px; }
+.featuredArtworkLinkVeNha { width: min(58vw, 820px); justify-self: start; min-height: 0; max-height: none; }
+.featuredArtworkLinkVeNha .featuredArtwork { min-height: 0; }
 .featuredArtwork { min-height: 100%; }
 .metadata { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding-top: 6.5vw; color: var(--text-muted); font-size: 14px; line-height: 1.15; }
 .metadataIndex { font: 400 48px / 1 var(--font-display), Georgia, serif; color: var(--text-main); margin-bottom: 25px; }
@@ -74,6 +76,7 @@
   .openingFooter { order: 3; display: grid; gap: 7px; font-size: 14px; }
   .featuredGrid { display: flex; flex-direction: column-reverse; gap: 22px; margin-top: 12vw; }
   .featuredArtworkLink { min-height: 120vw; max-height: none; }
+  .featuredArtworkLinkVeNha { width: 86vw; align-self: center; min-height: 0; max-height: none; }
   .metadata { padding-top: 0; gap: 8px; font-size: 12px; }
   .metadataIndex { font-size: 32px; margin-bottom: 9px; }
   .metadataTitle { font-size: 23px; }
